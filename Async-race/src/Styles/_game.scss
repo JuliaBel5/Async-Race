@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import './variables';
+@import './mixins';
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.container.active {
+  display: none;
+}
+.winnersContainer {
+  display: flex;
+  flex-direction: column;
+  display: none;
+
+}
+
+.winnersContainer.active {
+  display: initial;
+}
+
+.header {
+  color: blueviolet;
+  font-size: 32px;
+}
+
+.subheader {
+  color: blue;
+  font-size: 26px;
+}
+
+.table {
+  width: 40%;
+}
+
+.title {
+  width: 80px;
+  margin: 10px;
+  justify-content: space-between;
+  text-align: center;
+  align-content: center;
+}
+
+.tableData {
+  display: flex;
+ height: 50px;
+width: 80px;
+margin: 10px;
+text-align: center;
+align-items: center;
+ 
+}
+
+.minicar {
+  margin-left: -40px;
+  position: relative;
+}
+
+.buttonsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 500px;
+  gap: 15px;
+  align-items: center;
+}
+
+.firstLineWrapper{
+  display: flex;
+  flex-wrap: wrap;
+  width: fit-content;
+  align-items: center;
+}
+.smallButtonsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 300px;
+  height: 50px;
+  align-items: center;
+  gap: 15px;
+}
+
+
+.longbuttonsWrappe {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 600px;
+  gap: 15px;
+}
+
+.trackWrapper {
+  display: block;
+  border-bottom: 2px dashed black;
+}
+.secondLineWrapper {
+  display: flex;
+  height: 13%;
+  width: 100%;
+  align-content: center;
+  position: relative;
+}
+
+.secondLineWrapper::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  border-bottom: 2px dashed black;
+  top: 69%;
+  left: 0;
+}
+
+.carWrapper {
+  width: 85%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+ 
+.flag {
+  background-image: url(./src/images/RaceFlag.png);
+  width: 35px;
+  height: 35px;
+  margin-right: 5%;
+  background-size: cover;
+  position: relative;
+}
+
+.flag::before {
+  content: "";
+  border: 1px solid rgb(46, 7, 105);
+  position: absolute;
+  height: 100%;
+  top: 87%;
+  left: 40%;
+  transform: rotate(-45deg);
+}
+ 
+.button {
+
+  @include startButton;
+}
+.colorInput {
+  border-radius: 5px;
+}
+
+.inactive {
+  background-color: #898d8b;
+
+}
+.inactive:hover {
+  background-color: #9ca19f;
+}
+
+.longbutton {
+  width: 150px;
+  height: 20px;
+  background-color: #d6f8d6;
+  color: rgb(6, 6, 64);
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.longbutton:hover {
+  background-color: #7fc6a4;
+  color:rgb(25, 26, 92);
+  
+  }
+  .aButton {
+/*    width: 45%;
+    height: 35px;
+    background-color: #d6f8d6;
+    color: rgb(6, 6, 64);
+    margin: 2.5%;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s;*/
+    @include blueButton;
+  }
+
+
+.remove {
+@include remove
+}
+
+tr {
+  display: flex;
+}
+
+.car {
+  height: 90px;
+  width: 120px;
+  position: relative;
+}
+
+svg {
+  height: 160%;
+  width: 150%;
+  position: absolute;
+  left: -30px
+}
+
+ .brand {
+width: 150px;
+ }
+
+.input {
+  width: 150px;
+  height: 20px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+@keyframes move {
+  0% {
+      
+      left: 0;
+  }
+  100% {
+      
+      left: 500px;
+  }
+}
