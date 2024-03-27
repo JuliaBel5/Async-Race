@@ -33,6 +33,8 @@ export class TrackWrapper {
 
   public newCar: Car
 
+  flagImg: HTMLImageElement
+
   constructor() {
     this.garageService = new GarageService()
 
@@ -91,6 +93,15 @@ export class TrackWrapper {
       tag: 'div',
       classList: ['flag'],
     })
+
+    this.flagImg = createElement({
+      tag: 'img',
+      classList: ['flag-img'],
+    })
+
+    this.flagImg.src = 'flag.png'
+
+    this.flag.append(this.flagImg)
 
     this.brand = createElement({
       tag: 'div',

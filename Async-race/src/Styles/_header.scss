@@ -4,20 +4,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Lobster&family=Tillana:wght@400;500;600;700;800&display=swap');
 
 .header {
-  // position: absolute;
-  // top: 10px;
-  // left: 50%;
-  // transform: translateX(-50%);
+
   display: flex;
   justify-content: space-between;
   max-width: 1000px;
-  min-width: 700px;
+  width: 80%;
   height: 80px;
   background: rgba(247, 236, 218, 0.6);
   border: 2px solid $redBook;
   border-radius: 7px;
   padding: 5px 10px;
-  margin-top: 10px;
+  margin: 10px auto;
 }
 
 .select-container {
@@ -75,22 +72,17 @@ select option:checked {
   gap: 20px;
 }
 
-.backgroundTip {
-  cursor: pointer;
-}
 
-.audioTip {
-  cursor: pointer;
-}
-
-.translationTip {
-  cursor: pointer;
-}
-
-.logout {
+.icon {
   width: 70px;
   height: 70px;
   cursor: pointer;
-  background-image: url('logout.png');
-  background-size: cover;
+
+}
+
+.icon {
+  width: 100px;
+  height: 70px;
+  cursor: pointer;
+
 }

@@ -169,14 +169,17 @@ export class View {
           let startTimestamp: number | null
           let animationId: number
           let currentPosition = 0
+          let currentPositionInPercent = 0
 
           function updatePosition(timestamp: number): void {
             if (!startTimestamp) startTimestamp = timestamp
 
             const elapsedTime = timestamp - startTimestamp
-            const progress = Math.min(elapsedTime / animationTime, 1)
+            const progress = Math.min(elapsedTime / animationTime, 1) // это время продвижения
             currentPosition = progress * width
-            trackWrapper.newCar.car.style.transform = `translateX(${currentPosition}px)`
+            currentPositionInPercent = (currentPosition * 100) / width
+            console.log(currentPositionInPercent)
+            trackWrapper.newCar.car.style.transform = `translateX(${currentPositionInPercent * 9}%)`
 
             if (progress < 1) {
               // Keep animating until the end
@@ -250,6 +253,7 @@ export class View {
     let startTimestamp: number | null
     let animationId: number
     let currentPosition = 0
+    let currentPositionInPercent = 0
 
     function updatePosition(timestamp: number): void {
       if (!startTimestamp) startTimestamp = timestamp
@@ -257,10 +261,13 @@ export class View {
       const elapsedTime = timestamp - startTimestamp
       const progress = Math.min(elapsedTime / animationTime, 1)
       currentPosition = progress * width
+
       if (!car) {
         throw Error("Sorry dude, you don't have any car")
       }
-      car.style.transform = `translateX(${currentPosition}px)`
+      currentPositionInPercent = (currentPosition * 100) / width
+      car.style.transform = `translateX(${currentPositionInPercent * 9}%)`
+      console.log(currentPositionInPercent)
 
       if (progress < 1) {
         animationId = requestAnimationFrame(updatePosition)

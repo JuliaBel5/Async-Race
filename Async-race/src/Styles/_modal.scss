@@ -158,11 +158,11 @@
 }
 
 .title {
-  font-size: 24px;
+  font-size: 20px;
   font-family: 'Montserrat', sans-serif;
   color: $modalTitlePink;
-  height: 20px;
-
+  height: 70px;
+  min-width: 40%;
   text-align: center;
 }
 

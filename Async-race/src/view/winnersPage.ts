@@ -70,7 +70,7 @@ export class WinnersPage {
 
     this.header = createElement({
       tag: 'div',
-      classList: ['header'],
+      classList: ['headerGarage'],
       textContent: 'Winners',
     })
 

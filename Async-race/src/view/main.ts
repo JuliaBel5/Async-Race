@@ -1,6 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import { createElement } from '../Utils/utils'
 import { GarageService } from '../services/garage'
+import { Header } from './header'
 
 export class Main {
   public trackArr: HTMLElement[] = []
@@ -53,12 +54,15 @@ export class Main {
 
   public header: HTMLDivElement
 
+  public pageHeader: Header
+
   public pageNum: HTMLDivElement
 
   constructor() {
     this.garageService = new GarageService()
     this.root = document.querySelector('body')
-
+    this.pageHeader = new Header()
+    this.pageHeader.init()
     this.container = createElement({
       tag: 'div',
       classList: ['container'],
@@ -152,7 +156,7 @@ export class Main {
 
     this.header = createElement({
       tag: 'div',
-      classList: ['header'],
+      classList: ['headerGarage'],
       textContent: 'Garage',
     })
 

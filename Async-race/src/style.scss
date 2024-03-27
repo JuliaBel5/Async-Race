@@ -3,6 +3,7 @@
 @import './styles/mixins';
 @import './styles/variables';
 @import './styles/game';
+@import './styles/header';
 @import './styles/toast.scss';
 
 body {
@@ -12,12 +13,10 @@ body {
   padding: 0;
   height: 100vh;
   width: 100vw;
-
-
-    background: rgb(238,174,202);
-  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+  max-width: 100%;
   background-image: url('beige-background.jpg');
   background-size: cover;
   background-repeat: repeat;
+  overflow-x: hidden;
   
 }
