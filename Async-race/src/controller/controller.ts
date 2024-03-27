@@ -98,6 +98,43 @@ export class Controller {
       this.getWinnersList(this.currentWinPage)
     })
 
+    if (this.view.main.pageHeader.winnersButton && this.view.main.pageHeader) {
+      this.view.main.pageHeader.winnersButton.addEventListener('click', () => {
+        if (
+          this.view.main.pageHeader.winnersButton &&
+          this.view.main.pageHeader.garageButton
+        ) {
+          this.view.winnersPage.container.classList.toggle('active')
+          this.view.main.container.classList.toggle('active')
+          this.view.main.pageHeader.winnersButton.classList.add('inactive')
+          this.view.main.pageHeader.winnersButton.disabled = true
+          this.view.main.pageHeader.winnersButton?.classList.remove('button')
+          this.view.main.pageHeader.garageButton?.classList.add('button')
+          this.view.main.pageHeader.garageButton?.classList.remove('inactive')
+          this.view.main.pageHeader.garageButton.disabled = false
+          this.getWinnersList(this.currentWinPage)
+        }
+      })
+    }
+
+    if (this.view.main.pageHeader.garageButton) {
+      this.view.main.pageHeader.garageButton.addEventListener('click', () => {
+        if (
+          this.view.main.pageHeader.winnersButton &&
+          this.view.main.pageHeader.garageButton
+        ) {
+          this.view.main.container.classList.toggle('active')
+          this.view.winnersPage.container.classList.toggle('active')
+          this.view.main.pageHeader.winnersButton?.classList.add('button')
+          this.view.main.pageHeader.garageButton?.classList.add('inactive')
+          this.view.main.pageHeader.garageButton.disabled = true
+          this.view.main.pageHeader.winnersButton?.classList.remove('inactive')
+          this.view.main.pageHeader.garageButton?.classList.remove('button')
+          this.view.main.pageHeader.winnersButton.disabled = false
+        }
+      })
+    }
+
     this.view.winnersPage.garageButton.addEventListener('click', () => {
       this.view.main.container.classList.toggle('active')
       this.view.winnersPage.container.classList.toggle('active')
@@ -204,7 +241,7 @@ export class Controller {
 
       const newCarItem: NewCar = {
         name: brandName,
-        color,
+        color
       }
       this.view.garageService.createCar(newCarItem)
     }
@@ -247,7 +284,7 @@ export class Controller {
     try {
       const updatedWinnerData = {
         wins: 0,
-        time: 0,
+        time: 0
       }
       const existingWinner = await this.WinnerService.getWinner(winner.id)
 
@@ -268,7 +305,7 @@ export class Controller {
       const newWinner = {
         id: winner.id,
         wins: 1,
-        time: Math.ceil(winner.time / this.msecPerSec),
+        time: Math.ceil(winner.time / this.msecPerSec)
       }
       try {
         await this.WinnerService.createWinner(newWinner)

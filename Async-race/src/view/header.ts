@@ -45,7 +45,11 @@ export class Header {
       }
     })
 
-    const title = createElementNew('div', 'title', 'Welcome to our Race!')
+    const title = createElementNew(
+      'div',
+      'welcomeTitle',
+      'Welcome to our Race!'
+    )
 
     this.garageIcon = createElementNew('img', 'icon')
     this.garageIcon.src = 'garage.png'
@@ -60,10 +64,10 @@ export class Header {
       }
     })
 
-    this.garageButton = createElementNew('button', 'button', 'To Garage')
+    this.garageButton = createElementNew('button', 'inactive', 'To Garage')
     this.winnersButton = createElementNew('button', 'button', 'To Winners')
-    this.garageContainer.append(this.garageIcon, this.garageButton)
-    this.winnersContainer.append(this.winnersIcon, this.winnersButton)
+    this.garageContainer.append(this.garageButton, this.garageIcon)
+    this.winnersContainer.append(this.winnersButton, this.winnersIcon)
     this.header.style.justifyContent = 'space-between'
     this.header.append(this.garageContainer, title, this.winnersContainer)
     this.element.append(this.header)

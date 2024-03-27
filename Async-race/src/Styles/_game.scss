@@ -9,7 +9,19 @@
   flex-direction: column;
   max-width: 98%;
 }
+
 .container.active {
+  display: none;
+}
+
+.container1 {
+
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+}
+
+.container1.active {
   display: none;
 }
 
@@ -48,12 +60,12 @@
 
 .tableData {
   display: flex;
- height: 50px;
-width: 80px;
-margin: 10px;
-text-align: center;
-align-items: center;
- 
+  height: 50px;
+  width: 80px;
+  margin: 10px;
+  text-align: center;
+  align-items: center;
+
 }
 
 .minicar {
@@ -66,15 +78,20 @@ align-items: center;
   flex-wrap: wrap;
   width: 500px;
   gap: 15px;
+  margin-bottom: 10px;
   align-items: center;
 }
 
-.firstLineWrapper{
+.firstLineWrapper {
   display: flex;
   flex-wrap: wrap;
   width: fit-content;
+  justify-content: space-between;
   align-items: center;
+  gap: 15px;
+  padding: 10px 0;
 }
+
 .smallButtonsWrapper {
   display: flex;
   flex-wrap: wrap;
@@ -88,22 +105,25 @@ align-items: center;
 .longbuttonsWrappe {
   display: flex;
   flex-wrap: nowrap;
-  width: 600px;
+  max-width: 490px;
   gap: 15px;
 }
 
 .trackWrapper {
   display: block;
-  max-width: 100%;
+  width: 100%;
   border-bottom: 2px dashed black;
+  margin-bottom: 15px;
+
 }
+
 .secondLineWrapper {
-display: flex;
-flex-direction: column;
-justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 90px;
   width: 100%;
- 
+  gap: 15px;
   position: relative;
   border-bottom: 2px dashed darkgray;
 }
@@ -125,17 +145,18 @@ justify-content: space-between;
   align-items: flex-end;
   position: relative;
 }
- 
+
 .flag {
- 
+
   width: 12%;
   position: absolute;
-  top: -45%;
+  top: -55%;
   left: 87%;
 }
+
 .flag-img {
- height: 50px;
- 
+  height: 50px;
+
 }
 
 
@@ -144,7 +165,7 @@ justify-content: space-between;
   border: 1px solid rgb(46, 7, 105);
   position: absolute;
   height: 80%;
-  top: 70%;
+  top: 65%;
   left: 5%;
   transform: rotate(-40deg);
 }
@@ -153,6 +174,7 @@ justify-content: space-between;
 
   @include startButton;
 }
+
 .colorInput {
   border-radius: 5px;
 }
@@ -168,13 +190,16 @@ justify-content: space-between;
 }
 
 
-  .aButton {
-    @include blueButton;
-  }
+.aButton {
+  @include blueButton;
+}
 
+.bButton {
+  @include invertedBlueButton;
+}
 
 .remove {
-@include remove
+  @include remove
 }
 
 tr {
@@ -183,24 +208,25 @@ tr {
 
 .car {
   position: relative;
-  width: 10%; 
+  width: 10%;
   height: fit-content;
   max-height: 50px;
-  padding-top: 3%; /* Calculated based on the SVG's aspect ratio */
+  padding-top: 3%;
+  /* Calculated based on the SVG's aspect ratio */
   z-index: 5;
- }
- 
- svg {
+}
+
+svg {
   position: absolute;
   z-index: 5;
   max-height: 100%;
   left: 0;
   top: 0;
- }
+}
 
- .brand {
-width: 150px;
- }
+.brand {
+  width: 150px;
+}
 
 .input {
   width: 150px;
@@ -211,11 +237,12 @@ width: 150px;
 
 @keyframes move {
   0% {
-      
-      left: 0;
+
+    left: 0;
   }
+
   100% {
-      
-      left: 500px;
+
+    left: 500px;
   }
 }

@@ -71,7 +71,7 @@ export class View {
 
       const newCarItem: NewCar = {
         name: newBrandName,
-        color: newColor,
+        color: newColor
       }
       try {
         await this.garageService.updateCar(newCarItem, index)
@@ -101,7 +101,7 @@ export class View {
     const color = this.main.colorInput.value
     const newCarItem: NewCar = {
       name: brandName,
-      color,
+      color
     }
     try {
       await this.garageService.createCar(newCarItem)

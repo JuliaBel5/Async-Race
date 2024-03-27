@@ -40,29 +40,29 @@ export class TrackWrapper {
 
     this.trackWrapper = createElement({
       tag: 'div',
-      classList: ['trackWrapper'],
+      classList: ['trackWrapper']
     })
 
     this.firstLineWrapper = createElement({
       tag: 'div',
-      classList: ['firstLineWrapper'],
+      classList: ['firstLineWrapper']
     })
 
     this.secondLineWrapper = createElement({
       tag: 'div',
-      classList: ['secondLineWrapper'],
+      classList: ['secondLineWrapper']
     })
 
     this.selectButton = createElement({
       tag: 'button',
       classList: ['remove'],
-      textContent: 'Select',
+      textContent: 'Select'
     })
 
     this.removeButton = createElement({
       tag: 'button',
       classList: ['remove'],
-      textContent: 'Remove',
+      textContent: 'Remove'
     })
 
     removeButtonNameArr.push(this.removeButton)
@@ -70,33 +70,33 @@ export class TrackWrapper {
     this.aButton = createElement({
       tag: 'button',
       classList: ['aButton'],
-      textContent: 'A',
+      textContent: 'A'
     })
 
     this.bButton = createElement({
       tag: 'button',
-      classList: ['aButton'],
-      textContent: 'B',
+      classList: ['bButton'],
+      textContent: 'B'
     })
 
     this.abWrapper = createElement({
       tag: 'div',
-      classList: ['smallButtonsWrapper'],
+      classList: ['smallButtonsWrapper']
     })
 
     this.carWrapper = createElement({
       tag: 'div',
-      classList: ['carWrapper'],
+      classList: ['carWrapper']
     })
 
     this.flag = createElement({
       tag: 'div',
-      classList: ['flag'],
+      classList: ['flag']
     })
 
     this.flagImg = createElement({
       tag: 'img',
-      classList: ['flag-img'],
+      classList: ['flag-img']
     })
 
     this.flagImg.src = 'flag.png'
@@ -105,7 +105,7 @@ export class TrackWrapper {
 
     this.brand = createElement({
       tag: 'div',
-      classList: ['brand'],
+      classList: ['brand']
     })
 
     this.firstLineWrapper.append(

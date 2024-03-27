@@ -65,127 +65,127 @@ export class Main {
     this.pageHeader.init()
     this.container = createElement({
       tag: 'div',
-      classList: ['container'],
+      classList: ['container']
     })
     this.garageContainer = createElement({
       tag: 'div',
-      classList: ['container'],
+      classList: ['container1']
     })
     this.garageButton = createElement({
       tag: 'button',
       classList: ['button'],
-      textContent: 'To Garage',
+      textContent: 'To Garage'
     })
 
     this.winnersButton = createElement({
       tag: 'button',
       classList: ['button'],
-      textContent: 'To Winners',
+      textContent: 'To Winners'
     })
 
     this.createCar = createElement({
       tag: 'button',
       classList: ['button'],
-      textContent: 'Create',
+      textContent: 'Create'
     })
 
     this.updateButton = createElement({
       tag: 'button',
       classList: ['button'],
-      textContent: 'Update',
+      textContent: 'Update'
     })
 
     this.buttonsWrapper = createElement({
       tag: 'div',
-      classList: ['buttonsWrapper'],
+      classList: ['buttonsWrapper']
     })
 
     this.buttonsWrapper1 = createElement({
       tag: 'div',
-      classList: ['buttonsWrapper'],
+      classList: ['buttonsWrapper']
     })
 
     this.buttonsWrapper2 = createElement({
       tag: 'div',
-      classList: ['longbuttonsWrappe'],
+      classList: ['longbuttonsWrappe']
     })
 
     this.raceButton = createElement({
       tag: 'button',
       classList: ['button'],
-      textContent: 'Race',
+      textContent: 'Race'
     })
 
     this.resetButton = createElement({
       tag: 'button',
       classList: ['button'],
-      textContent: 'Reset',
+      textContent: 'Reset'
     })
 
     this.generateCarsButton = createElement({
       tag: 'button',
       classList: ['longbutton'],
-      textContent: 'Generate Cars',
+      textContent: 'Generate Cars'
     })
 
     this.colorInput = createElement({
       tag: 'input',
-      classList: ['colorInput'],
+      classList: ['colorInput']
     })
 
     this.colorInput.setAttribute('type', 'color')
 
     this.textInput = createElement({
       tag: 'input',
-      classList: ['input'],
+      classList: ['input']
     })
     this.textInput.setAttribute('type', 'text')
 
     this.updateInput = createElement({
       tag: 'input',
-      classList: ['input'],
+      classList: ['input']
     })
 
     this.updateInput.setAttribute('type', 'text')
 
     this.colorInput2 = createElement({
       tag: 'input',
-      classList: ['colorInput'],
+      classList: ['colorInput']
     })
     this.colorInput2.setAttribute('type', 'color')
 
     this.header = createElement({
       tag: 'div',
       classList: ['headerGarage'],
-      textContent: 'Garage',
+      textContent: 'Garage'
     })
 
     this.pageNum = createElement({
       tag: 'div',
       classList: ['subheader'],
-      textContent: 'Page #1',
+      textContent: 'Page #1'
     })
 
     this.prevButton = createElement({
       tag: 'button',
       classList: ['aButton'],
-      textContent: 'Prev',
+      textContent: 'Prev'
     })
 
     this.nextButton = createElement({
       tag: 'button',
       classList: ['aButton'],
-      textContent: 'Next',
+      textContent: 'Next'
     })
 
     this.pagesButtonWrapper = createElement({
       tag: 'div',
-      classList: ['smallButtonsWrapper'],
+      classList: ['smallButtonsWrapper']
     })
     this.pagesButtonWrapper.append(this.prevButton, this.nextButton)
 
     this.container.append(
-      this.buttonsWrapper,
+      //    this.buttonsWrapper,
       this.buttonsWrapper1,
       this.buttonsWrapper2,
       this.header,
