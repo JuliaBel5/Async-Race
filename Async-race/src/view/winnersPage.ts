@@ -13,7 +13,7 @@ export class WinnersPage {
     'Car',
     'Name',
     'Wins',
-    'Best time(seconds)'
+    'Best time (seconds)'
   ]
 
   public linesArr: HTMLElement[] = []
@@ -88,7 +88,7 @@ export class WinnersPage {
     for (let i = 0; i < 5; i += 1) {
       const title = createElement({
         tag: 'th',
-        classList: ['title'],
+        classList: ['tabTitle'],
         textContent: this.titlesArr[i]
       })
       this.titleArr.push(title)
@@ -96,19 +96,19 @@ export class WinnersPage {
     }
     this.winPrevButton = createElement({
       tag: 'button',
-      classList: ['aButton'],
+      classList: ['page-button'],
       textContent: 'Prev'
     })
 
     this.winNextButton = createElement({
       tag: 'button',
-      classList: ['aButton'],
+      classList: ['page-button'],
       textContent: 'Next'
     })
 
     this.winPagesButtonWrapper = createElement({
       tag: 'div',
-      classList: ['smallButtonsWrapper']
+      classList: ['pagesButtonsWrapper']
     })
     this.winPagesButtonWrapper.append(this.winPrevButton, this.winNextButton)
 
@@ -148,8 +148,15 @@ export class WinnersPage {
       const td2 = createElement({
         tag: 'td',
         classList: ['tableData', 'minicar'],
+        innerHTML: ''
+      })
+      const svg = createElement({
+        tag: 'div',
+        classList: ['svg'],
         innerHTML: svgImage
       })
+      td2.append(svg)
+
       const td3 = createElement({
         tag: 'td',
         classList: ['tableData'],
@@ -164,11 +171,11 @@ export class WinnersPage {
 
       const td5 = createElement({
         tag: 'td',
-        classList: ['tableData'],
+        classList: ['tableData', 'best'],
         textContent: winnersList[i].time.toString()
       })
-
-      colorCar(td2, winCars[i].color)
+      console.log(svg)
+      colorCar(svg, winCars[i].color)
       row.append(td1, td2, td3, td4, td5)
       this.table.append(row)
     }

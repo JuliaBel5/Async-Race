@@ -112,13 +112,13 @@ export class Main {
 
     this.raceButton = createElement({
       tag: 'button',
-      classList: ['button'],
+      classList: ['race'],
       textContent: 'Race'
     })
 
     this.resetButton = createElement({
       tag: 'button',
-      classList: ['button'],
+      classList: ['race'],
       textContent: 'Reset'
     })
 
@@ -168,13 +168,13 @@ export class Main {
 
     this.prevButton = createElement({
       tag: 'button',
-      classList: ['aButton'],
+      classList: ['page-button'],
       textContent: 'Prev'
     })
 
     this.nextButton = createElement({
       tag: 'button',
-      classList: ['aButton'],
+      classList: ['page-button'],
       textContent: 'Next'
     })
 

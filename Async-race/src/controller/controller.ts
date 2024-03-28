@@ -142,9 +142,9 @@ export class Controller {
 
     this.view.main.raceButton.addEventListener('click', async () => {
       this.view.main.raceButton.disabled = true
-      this.view.main.raceButton.classList.add('inactive')
+      this.view.main.raceButton.classList.add('inactive2')
       this.view.main.resetButton.disabled = true
-      this.view.main.resetButton.classList.add('inactive')
+      this.view.main.resetButton.classList.add('inactive2')
       const carIdList: number[] = []
       const carsList = await this.GarageService.getCarsList(this.currentPage)
       for (let i = 0; i < carsList.length; i += 1) {
@@ -159,12 +159,12 @@ export class Controller {
 
       this.updateWinner(winner)
       this.view.main.resetButton.disabled = false
-      this.view.main.resetButton.classList.remove('inactive')
+      this.view.main.resetButton.classList.remove('inactive2')
     })
 
     this.view.main.resetButton.addEventListener('click', async () => {
       this.view.main.raceButton.disabled = false
-      this.view.main.raceButton.classList.remove('inactive')
+      this.view.main.raceButton.classList.remove('inactive2')
       const carIdList: number[] = []
       const carsList = await this.GarageService.getCarsList(this.currentPage)
       for (let i = 0; i < carsList.length; i += 1) {
