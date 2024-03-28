@@ -4,6 +4,7 @@ import { svgImage } from '../model/svg'
 import { createElement, colorCar } from '../Utils/utils'
 import { Garage, WinnerType } from '../Utils/types'
 import { GarageService } from '../services/garage'
+type HandlerFunction = () => void
 
 export class WinnersPage {
   public titleArr: HTMLElement[] = []
@@ -13,7 +14,7 @@ export class WinnersPage {
     'Car',
     'Name',
     'Wins',
-    'Best time (seconds)'
+    'Best time (sec)'
   ]
 
   public linesArr: HTMLElement[] = []
@@ -41,6 +42,12 @@ export class WinnersPage {
   public winNextButton: HTMLButtonElement
 
   public winPagesButtonWrapper: HTMLDivElement
+
+  timeSortButton: HTMLDivElement
+
+  winSortButton: HTMLDivElement
+
+  // winCarsArr: WinnerType[]
 
   constructor() {
     this.garageService = new GarageService()
@@ -94,6 +101,27 @@ export class WinnersPage {
       this.titleArr.push(title)
       this.table.append(title)
     }
+
+    this.timeSortButton = createElement({
+      tag: 'div',
+      classList: ['sort-button'],
+      textContent: ''
+    })
+
+    this.winSortButton = createElement({
+      tag: 'div',
+      classList: ['sort-button'],
+      textContent: ''
+    })
+    this.titleArr[4].append(this.timeSortButton)
+    this.titleArr[4].classList.add('with-sort')
+    this.titleArr[4].style.cursor = 'pointer'
+    this.titleArr[3].append(this.winSortButton)
+    this.titleArr[3].classList.add('with-sort-wins')
+    this.titleArr[3].style.cursor = 'pointer'
+
+      
+
     this.winPrevButton = createElement({
       tag: 'button',
       classList: ['page-button'],
@@ -124,14 +152,17 @@ export class WinnersPage {
       this.table,
       this.winPagesButtonWrapper
     )
+    // this.winCarsArr = []
   }
 
   public async renderWinnersTable(
     num: number,
     winnersList: WinnerType[],
-    winCars: Garage[]
+    winCars: Garage[],
+    
   ): Promise<void> {
-    // const winCarsArr = []
+    
+    
     while (this.table.children[5]) {
       this.table.removeChild(this.table.children[5])
     }
@@ -156,28 +187,51 @@ export class WinnersPage {
         innerHTML: svgImage
       })
       td2.append(svg)
+      let carName = ''
+      let color = ''
+      for (let j = 0; j < winCars.length; j += 1) {
+        if (winCars[j].id === winnersList[i].id) {
+          carName = winCars[j].name
+          color = winCars[j].color
+        }
+      }
 
       const td3 = createElement({
         tag: 'td',
         classList: ['tableData'],
-        textContent: winCars[i].name
+        textContent: carName // winCars[i].name
       })
 
       const td4 = createElement({
         tag: 'td',
-        classList: ['tableData'],
+        classList: ['tableData', 'with-sort-wins'],
         textContent: winnersList[i].wins.toString()
       })
 
       const td5 = createElement({
         tag: 'td',
-        classList: ['tableData', 'best'],
+        classList: ['tableData', 'with-sort'],
         textContent: winnersList[i].time.toString()
       })
-      console.log(svg)
-      colorCar(svg, winCars[i].color)
+      colorCar(svg, color)
       row.append(td1, td2, td3, td4, td5)
       this.table.append(row)
+    }
+  }
+
+  bindTimeSortButton = (handler: HandlerFunction) => {
+    if (this.titleArr[4]) {
+      this.titleArr[4].addEventListener('click', () => {
+        handler()
+      })
+    }
+  }
+
+  bindWinsSortButton = (handler: HandlerFunction) => {
+    if (this.titleArr[3]) {
+      this.titleArr[3].addEventListener('click', () => {
+        handler()
+      })
     }
   }
 }

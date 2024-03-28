@@ -178,7 +178,6 @@ export class View {
             const progress = Math.min(elapsedTime / animationTime, 1) // это время продвижения
             currentPosition = progress * width
             currentPositionInPercent = (currentPosition * 100) / width
-            console.log(currentPositionInPercent)
             trackWrapper.newCar.car.style.transform = `translateX(${currentPositionInPercent * 9}%)`
 
             if (progress < 1) {
@@ -220,7 +219,6 @@ export class View {
 
   public async renderCars(carsListPromise: Promise<Garage[]>): Promise<void> {
     const carList = await carsListPromise
-    console.log(carList)
     this.createNewCars(carList.length, carList)
   }
 
@@ -235,9 +233,9 @@ export class View {
     return carList
   }
 
-  public async raceCar(id: number): Promise<void | RaceResults> {
+  public async raceCar(id: number, signal: AbortSignal): Promise<void | RaceResults> {
     //  объект с id и временем || undefined
-    const engineInfo = await this.engineService.getEnginePrams(id, 'started')
+    const engineInfo = await this.engineService.getEnginePrams(id, 'started', signal)
     const car: HTMLElement | null = document.getElementById(`${id}`)
     if (!car) {
       throw Error("Sorry dude, you don't have any car")
@@ -267,7 +265,7 @@ export class View {
       }
       currentPositionInPercent = (currentPosition * 100) / width
       car.style.transform = `translateX(${currentPositionInPercent * 9}%)`
-      console.log(currentPositionInPercent)
+      
 
       if (progress < 1) {
         animationId = requestAnimationFrame(updatePosition)
@@ -278,7 +276,7 @@ export class View {
     animationId = requestAnimationFrame(updatePosition)
 
     try {
-      await this.engineService.getEngineStatus(id, 'drive')
+      await this.engineService.getEngineStatus(id, 'drive', signal)
       const carResult = { id, time: animationTime }
       return carResult
     } catch (error) {
@@ -288,7 +286,7 @@ export class View {
     }
   }
 
-  public async launchAll(): Promise<void> {
+ /* public async launchAll(): Promise<void> {
     const idArr: number[] = []
     try {
       const carsList = await this.garageService.getCarsList(this.currentPageNum)
@@ -300,7 +298,7 @@ export class View {
     } catch (error) {
       console.error('Failed to get the cars list')
     }
-  }
+  }*/
 
   showToast = () => {
     this.toast.toastContainer.classList.remove('show')

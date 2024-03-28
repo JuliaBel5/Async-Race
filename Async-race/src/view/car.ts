@@ -10,7 +10,7 @@ export class Car {
     this.car = createElement({
       tag: 'div',
       classList: ['car'],
-      innerHTML: svgImage,
+      innerHTML: svgImage
     })
   }
 
@@ -18,7 +18,7 @@ export class Car {
     this.newCar = createElement({
       tag: 'div',
       classList: ['car'],
-      innerHTML: svgImage,
+      innerHTML: svgImage
     })
 
     return this.newCar

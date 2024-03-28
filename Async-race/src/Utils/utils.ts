@@ -5,7 +5,7 @@ export function createElement<K extends keyof HTMLElementTagNameMap>({
   tag,
   classList,
   textContent,
-  innerHTML,
+  innerHTML
 }: CreateElementPropsType<K>): HTMLElementTagNameMap[K] {
   const element: HTMLElementTagNameMap[K] = document.createElement(tag)
 

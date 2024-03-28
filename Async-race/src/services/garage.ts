@@ -14,7 +14,7 @@ export class GarageService {
     const response: Response = await fetch(
       `http://localhost:3000${this.garageURL}?_page=${pageNumber}&_limit=7`,
       {
-        method: 'GET',
+        method: 'GET'
       }
     )
     if (!response.ok) {
@@ -25,7 +25,7 @@ export class GarageService {
 
   public async getFullCarsList(): Promise<Garage[]> {
     const response = await fetch(`http://localhost:3000${this.garageURL}`, {
-      method: 'GET',
+      method: 'GET'
     })
     if (!response.ok) {
       throw Error('Failed to get cars list')
@@ -37,7 +37,7 @@ export class GarageService {
     const response: Response = await fetch(
       `http://localhost:3000${this.garageURL}/${id}`,
       {
-        method: 'GET',
+        method: 'GET'
       }
     )
     if (!response.ok) {
@@ -55,9 +55,9 @@ export class GarageService {
       {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(newCarItem),
+        body: JSON.stringify(newCarItem)
       }
     )
 
@@ -73,9 +73,9 @@ export class GarageService {
       {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(newCarItem),
+        body: JSON.stringify(newCarItem)
       }
     )
     if (!response.ok) {
@@ -91,7 +91,7 @@ export class GarageService {
     const response: Response = await fetch(
       `http://localhost:3000${this.garageURL}/${id}`,
       {
-        method: 'DELETE',
+        method: 'DELETE'
       }
     )
     if (!response.ok) {

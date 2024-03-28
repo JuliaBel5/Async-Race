@@ -3,10 +3,11 @@
 
 import { View } from '../view/view'
 import { findWinner, getRandomColor } from '../Utils/utils'
-import { NewCar, UpdatedWinner, RaceResults } from '../Utils/types'
+import { NewCar, RaceResults } from '../Utils/types'
 import { GarageService } from '../services/garage'
 import { WinnerService } from '../services/winners'
 import { EngineService } from '../services/engine'
+import { Toast } from '../view/toast'
 
 export class Controller {
   public view: View
@@ -32,6 +33,12 @@ export class Controller {
   private readonly carsPerPage: number
 
   private readonly winnersPerPage: number
+  winsSortOrder: string
+  timeSortOrder: string
+  sortCriteria: string
+  sortOrder: string
+  raceController: AbortController = new AbortController();
+  toast: any
 
   constructor(view: View) {
     this.view = view
@@ -46,7 +53,8 @@ export class Controller {
     this.carsView = this.view.renderCars(
       this.GarageService.getCarsList(this.currentPage)
     )
-
+    this.toast = new Toast()
+    this.toast.bindConfirmButton(this.showToast)
     this.view.main.prevButton.addEventListener('click', async () => {
       this.getPageNumber()
       const secondPage = 2
@@ -80,7 +88,7 @@ export class Controller {
       if (this.currentWinPage >= secondPage) {
         this.currentWinPage -= 1
         this.view.winnersPage.pageNum.textContent = `Page # ${this.currentWinPage}`
-        this.getWinnersList(this.currentWinPage)
+        this.getWinnersList(this.currentWinPage, this.sortCriteria, this.sortOrder)
       }
     })
 
@@ -88,14 +96,14 @@ export class Controller {
       if (this.currentWinPage < (await this.totalWinPages)) {
         this.currentWinPage += 1
         this.view.winnersPage.pageNum.textContent = `Page # ${this.currentWinPage}`
-        this.getWinnersList(this.currentWinPage)
+        this.getWinnersList(this.currentWinPage, this.sortCriteria, this.sortOrder)
       }
     })
 
     this.view.main.winnersButton.addEventListener('click', () => {
       this.view.winnersPage.container.classList.toggle('active')
       this.view.main.container.classList.toggle('active')
-      this.getWinnersList(this.currentWinPage)
+      this.getWinnersList(this.currentWinPage, this.sortCriteria, this.sortOrder)
     })
 
     if (this.view.main.pageHeader.winnersButton && this.view.main.pageHeader) {
@@ -112,7 +120,7 @@ export class Controller {
           this.view.main.pageHeader.garageButton?.classList.add('button')
           this.view.main.pageHeader.garageButton?.classList.remove('inactive')
           this.view.main.pageHeader.garageButton.disabled = false
-          this.getWinnersList(this.currentWinPage)
+          this.getWinnersList(this.currentWinPage, this.sortCriteria, this.sortOrder)
         }
       })
     }
@@ -141,10 +149,11 @@ export class Controller {
     })
 
     this.view.main.raceButton.addEventListener('click', async () => {
+      this.raceController = new AbortController();
       this.view.main.raceButton.disabled = true
       this.view.main.raceButton.classList.add('inactive2')
-      this.view.main.resetButton.disabled = true
-      this.view.main.resetButton.classList.add('inactive2')
+     // this.view.main.resetButton.disabled = true
+    //  this.view.main.resetButton.classList.add('inactive2')
       const carIdList: number[] = []
       const carsList = await this.GarageService.getCarsList(this.currentPage)
       for (let i = 0; i < carsList.length; i += 1) {
@@ -152,17 +161,18 @@ export class Controller {
         carIdList.push(id)
       }
       const raceList = await Promise.all(
-        carIdList.map((el) => this.view.raceCar(el))
+        carIdList.map((el) => this.view.raceCar(el, this.raceController.signal))
       )
 
       const winner = findWinner(raceList)
 
       this.updateWinner(winner)
-      this.view.main.resetButton.disabled = false
-      this.view.main.resetButton.classList.remove('inactive2')
+    //  this.view.main.resetButton.disabled = false
+   //   this.view.main.resetButton.classList.remove('inactive2')
     })
 
     this.view.main.resetButton.addEventListener('click', async () => {
+      this.raceController.abort();
       this.view.main.raceButton.disabled = false
       this.view.main.raceButton.classList.remove('inactive2')
       const carIdList: number[] = []
@@ -171,11 +181,11 @@ export class Controller {
         const { id } = carsList[i]
         carIdList.push(id)
       }
-      /*  const stoppedCars = await Promise.all(
+    await Promise.all(
         carIdList.map((el: number) => {
           return this.EngineService.getEnginePrams(el, 'stopped')
         })
-      ) */
+      ) 
       this.view.carsArr.forEach((el) => {
         const newEl = el
         if (newEl.parentElement !== null) {
@@ -188,16 +198,28 @@ export class Controller {
     this.view.main.generateCarsButton.addEventListener('click', () =>
       this.generateNewCars(100)
     )
+    this.view.winnersPage.bindTimeSortButton(this.sortTime)
+    this.view.winnersPage.bindWinsSortButton(this.sortWins)
+    this.winsSortOrder = 'ASC'
+    this.timeSortOrder = 'ASC'
+    this.sortOrder = 'ASC'
+    this.sortCriteria = 'time'
+  }
+  showToast = () => {
+    this.toast.toastContainer.classList.remove('show')
+    this.toast.audio.src = 'click.mp3'
+    this.toast.audio.play()
+    clearTimeout(this.toast.timeoutId)
   }
 
-  private async getWinnersList(num: number): Promise<void> {
+  private async getWinnersList(num: number, sort: string, order: string): Promise<void> {
     try {
       const winsList = await this.WinnerService.getFullWinnersList()
 
       this.view.winnersPage.header.textContent = `Winners (${winsList.length})`
 
       try {
-        const winnersList = await this.WinnerService.getWinnersList(num)
+        const winnersList = await this.WinnerService.getWinnersList(num, sort, order)
 
         const carIdList = winnersList.map((el) => el.id)
 
@@ -207,7 +229,7 @@ export class Controller {
         this.view.winnersPage.renderWinnersTable(
           winCars.length,
           winnersList,
-          winCars
+          winCars,
         )
       } catch (error) {
         console.error('Failed to get the winners list', error)
@@ -277,7 +299,7 @@ export class Controller {
       const winnerName = await this.GarageService.getCar(winner.id)
 
       // eslint-disable-next-line no-alert
-      alert(`The winner is ${winnerName.name}`)
+      this.toast.show(`The winner is ${winnerName.name}`)
     } catch (error) {
       console.error('Failed to get the winner name')
     }
@@ -298,8 +320,8 @@ export class Controller {
         updatedWinnerData.wins = existingWinner.wins + 1
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const updatedWinner: UpdatedWinner =
+
+    
         await this.WinnerService.updateWinner(updatedWinnerData, winner.id)
     } catch {
       const newWinner = {
@@ -313,5 +335,44 @@ export class Controller {
         console.error('Failed to create a new winner', error)
       }
     }
+  }
+
+  sortTime = () => {
+    this.sortCriteria = 'time'
+    if (this.timeSortOrder === 'ASC') {
+      this.timeSortOrder = 'DESC'
+      this.sortOrder = 'DESC'
+      this.view.winnersPage.timeSortButton.classList.add('active')
+      this.view.winnersPage.timeSortButton.classList.add('visible')
+      this.view.winnersPage.winSortButton.classList.remove('visible')
+    
+    } else if (this.timeSortOrder === 'DESC') {
+      this.timeSortOrder = 'ASC'
+      this.sortOrder = 'ASC'
+      this.view.winnersPage.timeSortButton.classList.remove('active')
+      this.view.winnersPage.timeSortButton.classList.add('visible')
+      this.view.winnersPage.winSortButton.classList.remove('visible')
+    }
+    this.getWinnersList(this.currentWinPage, this.sortCriteria, this.sortOrder)
+  }
+
+  sortWins = () => {
+    this.sortCriteria = 'wins'
+    if (this.winsSortOrder === 'ASC') {
+      this.winsSortOrder = 'DESC'
+      this.sortOrder = 'DESC'
+      this.view.winnersPage.winSortButton.classList.add('active')
+      this.view.winnersPage.winSortButton.classList.add('visible')
+      this.view.winnersPage.timeSortButton.classList.remove('visible')
+      console.log(' this.winsSortOrder',  this.winsSortOrder)
+    } else if (this.winsSortOrder === 'DESC') {
+      this.winsSortOrder = 'ASC'
+      this.sortOrder = 'ASC'
+      this.view.winnersPage.winSortButton.classList.remove('active')
+      this.view.winnersPage.winSortButton.classList.add('visible')
+      this.view.winnersPage.timeSortButton.classList.remove('visible')
+      console.log(' this.winsSortOrder',  this.winsSortOrder)
+    }
+    this.getWinnersList(this.currentWinPage, this.sortCriteria, this.sortOrder)
   }
 }

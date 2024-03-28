@@ -3,11 +3,11 @@ import { WinnerType, NewWinner, UpdatedWinner } from '../Utils/types'
 export class WinnerService {
   private readonly winnersURL = '/winners'
 
-  public async getWinnersList(pageNumber: number): Promise<WinnerType[]> {
+  public async getWinnersList(pageNumber: number, sort: string = 'time', order: string = 'ASC'): Promise<WinnerType[]> {
     const response: Response = await fetch(
-      `http://localhost:3000${this.winnersURL}?_page=${pageNumber}&_limit=10`,
+      `http://localhost:3000${this.winnersURL}?_page=${pageNumber}&_limit=10&_sort=${sort}&_order=${order}`,
       {
-        method: 'GET',
+        method: 'GET'
       }
     )
 
@@ -21,7 +21,7 @@ export class WinnerService {
     const response: Response = await fetch(
       `http://localhost:3000${this.winnersURL}`,
       {
-        method: 'GET',
+        method: 'GET'
       }
     )
 
@@ -35,7 +35,7 @@ export class WinnerService {
     const response: Response = await fetch(
       `http://localhost:3000${this.winnersURL}/${id}`,
       {
-        method: 'GET',
+        method: 'GET'
       }
     )
     if (!response.ok) {
@@ -50,9 +50,9 @@ export class WinnerService {
       {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(newWinnerItem),
+        body: JSON.stringify(newWinnerItem)
       }
     )
 
@@ -69,7 +69,7 @@ export class WinnerService {
     const response: Response = await fetch(
       `http://localhost:3000${this.winnersURL}/${id}`,
       {
-        method: 'DELETE',
+        method: 'DELETE'
       }
     )
     if (!response.ok) {
@@ -87,9 +87,9 @@ export class WinnerService {
       {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(newWinnerItem),
+        body: JSON.stringify(newWinnerItem)
       }
     )
     if (!response.ok) {
@@ -97,4 +97,6 @@ export class WinnerService {
     }
     return response.json()
   }
+
+
 }

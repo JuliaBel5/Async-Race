@@ -5,11 +5,12 @@ import { EngineInfo, EngineResult } from '../Utils/types'
 export class EngineService {
   private readonly engineURL = '/engine'
 
-  public async getEnginePrams(id: number, status: string): Promise<EngineInfo> {
+  public async getEnginePrams(id: number, status: string, signal?: AbortSignal): Promise<EngineInfo> {
     const response: Response = await fetch(
       `http://localhost:3000${this.engineURL}?id=${id}&status=${status}`,
       {
         method: 'PATCH',
+        signal: signal
       }
     )
     if (!response.ok) {
@@ -28,12 +29,14 @@ export class EngineService {
 
   public async getEngineStatus(
     id: number,
-    status: string
+    status: string, 
+    signal?: AbortSignal
   ): Promise<EngineResult> {
     const response: Response = await fetch(
       `http://localhost:3000${this.engineURL}/?id=${id}&status=${status}`,
       {
         method: 'PATCH',
+        signal: signal
       }
     )
     if (!response.ok) {

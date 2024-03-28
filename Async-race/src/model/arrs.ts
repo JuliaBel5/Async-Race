@@ -9,7 +9,7 @@ export const carBrands = [
   ' Mercedes',
   'Toyota',
   'Jaguar',
-  'Shkoda',
+  'Shkoda'
 ]
 export const carModels = [
   'Roadster',
@@ -20,5 +20,5 @@ export const carModels = [
   'Octavia',
   'Camry',
   'Xj',
-  'Sprinter',
+  'Sprinter'
 ]

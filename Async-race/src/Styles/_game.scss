@@ -81,8 +81,12 @@
 
 }
 
-.best {
-  width: 86.5px;
+.with-sort-wins {
+  width: 80px;
+}
+
+.with-sort {
+  width: 100px;
 }
 
 th {
@@ -303,4 +307,28 @@ svg {
 
 .page-button {
   @include carWheelButton
+}
+
+.sort-button {
+  display: none;
+  margin-left: 5px;
+  margin-top: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('arrowUp.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.sort-button:hover {
+  transform: scale(1.1);
+}
+
+.sort-button.visible {
+  display: inline-block;
+}
+
+.sort-button.active {
+  background-image: url('arrowDown.png');
 }
