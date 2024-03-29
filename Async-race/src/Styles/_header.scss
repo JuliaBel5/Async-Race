@@ -10,7 +10,7 @@
   align-items: center;
   max-width: 1000px;
   width: 90%;
-  height: 80px;
+  height: 90px;
   background: rgba(247, 236, 218, 0.6);
   border: 2px solid $redBook;
   border-radius: 7px;
@@ -29,44 +29,6 @@
   font-size: 18px;
 }
 
-.label {
-  height: 40px;
-  color: $redBook;
-  font-size: 22px;
-}
-
-.round-select {
-  height: 40px;
-  width: 50px;
-  border-radius: 5px;
-  border: 2px solid $greenBook;
-  background-color: rgb(241, 230, 217);
-}
-
-.level-select {
-  height: 40px;
-  width: 50px;
-  border-radius: 5px;
-  border: 2px solid $greenBook;
-  background-color: rgb(241, 230, 217);
-}
-
-#sel1 select option:hover {
-  background-color: $selectHover;
-  border: 2px solid $selectBorder;
-  color: #fff;
-}
-
-select option:checked {
-  background-color: rgb(128, 113, 99);
-  border: 2px solid $selectBorder;
-  color: #fff;
-}
-
-::selection {
-  background: $selectHover;
-  color: #fff;
-}
 
 .icon-container {
   padding-top: 5px;
@@ -81,14 +43,14 @@ select option:checked {
 
 .icon1 {
   width: 70px;
-  height: 50px;
+  height: 40px;
   cursor: pointer;
 
 }
 
 .icon {
   width: 50px;
-  height: 50px;
+  height: 40px;
   cursor: pointer;
 
 }

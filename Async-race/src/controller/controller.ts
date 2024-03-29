@@ -38,7 +38,8 @@ export class Controller {
   sortCriteria: string
   sortOrder: string
   raceController: AbortController = new AbortController();
-  toast: any
+  toast: Toast
+  audio: HTMLAudioElement
 
   constructor(view: View) {
     this.view = view
@@ -54,7 +55,8 @@ export class Controller {
       this.GarageService.getCarsList(this.currentPage)
     )
     this.toast = new Toast()
-    this.toast.bindConfirmButton(this.showToast)
+    this.audio = new Audio()
+  //  this.toast.bindConfirmButton(this.showToast)
     this.view.main.prevButton.addEventListener('click', async () => {
       this.getPageNumber()
       const secondPage = 2
@@ -208,12 +210,12 @@ export class Controller {
     this.sortOrder = 'ASC'
     this.sortCriteria = 'time'
   }
-  showToast = () => {
+  /*showToast = () => {
     this.toast.toastContainer.classList.remove('show')
     this.toast.audio.src = 'click.mp3'
     this.toast.audio.play()
     clearTimeout(this.toast.timeoutId)
-  }
+  }*/
 
   private async getWinnersList(num: number, sort: string, order: string): Promise<void> {
     try {
@@ -301,8 +303,8 @@ export class Controller {
     }
     try {
       const winnerName = await this.GarageService.getCar(winner.id)
-
-      // eslint-disable-next-line no-alert
+      this.audio.src = 'click.mp3'
+      this.audio.play()
       this.toast.show(`The winner is ${winnerName.name}`)
     } catch (error) {
       console.error('Failed to get the winner name')

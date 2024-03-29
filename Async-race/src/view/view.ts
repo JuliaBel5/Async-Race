@@ -49,7 +49,7 @@ export class View {
     this.engineService = new EngineService()
     this.currentPageNum = null
     this.toast = new Toast()
-    this.toast.bindConfirmButton(this.showToast)
+   // this.toast.bindConfirmButton(this.showToast)
     this.main.createCar.addEventListener('click', () => this.createNewCar())
     this.ind = ''
     this.audio = new Audio()
@@ -306,12 +306,12 @@ export class View {
     } catch (error) {
       console.error('Failed to get the cars list')
     }
-  }*/
+  }
 
   showToast = () => {
     this.toast.toastContainer.classList.remove('show')
     this.toast.audio.src = 'click.mp3'
     this.toast.audio.play()
     clearTimeout(this.toast.timeoutId)
-  }
+  }*/
 }

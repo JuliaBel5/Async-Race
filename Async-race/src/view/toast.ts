@@ -1,6 +1,6 @@
 import { createElementNew } from '../Utils/utils'
 
-type HandlerFunction = () => void
+//type HandlerFunction = () => void
 
 export class Toast {
   toastContainer: HTMLElement
@@ -32,10 +32,16 @@ export class Toast {
       'Close'
     )
     this.toast = createElementNew('div', 'toast', '')
-    this.buttonContainer.append(this.confirmButton, this.cancelButton)
+    this.buttonContainer.append(this.confirmButton)
     this.toastContainer.append(this.toast, this.buttonContainer)
     this.audio = new Audio()
     this.cancelButton.addEventListener('click', () => {
+      this.toastContainer.classList.remove('show')
+      this.audio.src = 'click.mp3'
+      this.audio.play()
+      clearTimeout(this.timeoutId)
+    })
+    this.confirmButton.addEventListener('click', () => {
       this.toastContainer.classList.remove('show')
       this.audio.src = 'click.mp3'
       this.audio.play()
@@ -52,11 +58,11 @@ export class Toast {
     }, duration)
   }
 
-  bindConfirmButton = (handler: HandlerFunction) =>
-    this.confirmButton.addEventListener('click', () => {
-      this.audio.src = 'click.mp3'
-      this.audio.play()
-      handler()
-      this.toastContainer.remove()
-    })
+//  bindConfirmButton = (handler: HandlerFunction) =>
+   // this.confirmButton.addEventListener('click', () => {
+  //    this.audio.src = 'click.mp3'
+  //    this.audio.play()
+    //  handler()
+      //this.toastContainer.remove()
+  //  })
 }
