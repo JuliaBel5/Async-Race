@@ -224,7 +224,9 @@ th {
 
 }
 
-
+.disabled-aButton {
+  @include disabledBlueButton
+}
 
 .longbutton {
   @include generateButton;

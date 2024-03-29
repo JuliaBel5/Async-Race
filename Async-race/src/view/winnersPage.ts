@@ -159,6 +159,7 @@ export class WinnersPage {
     num: number,
     winnersList: WinnerType[],
     winCars: Garage[],
+    winPageNum: number
     
   ): Promise<void> {
     
@@ -174,7 +175,7 @@ export class WinnersPage {
       const td1 = createElement({
         tag: 'td',
         classList: ['tableData'],
-        textContent: `${i + 1}`
+        textContent: `${i + 1+ 10*(winPageNum-1)}`
       })
       const td2 = createElement({
         tag: 'td',

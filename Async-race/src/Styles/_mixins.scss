@@ -88,6 +88,31 @@
   }
 }
 
+@mixin disabledBlueButton {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 30px;
+  border: 2px solid #888787;
+  color: #666666;
+  text-align: center;
+  border-radius: 10px;
+  color: $blueColor;
+  font-weight: 400;
+  cursor: not-allowed;
+  background: linear-gradient(to left, #f7f3f3, #bfbbbb);
+  box-shadow: 2px 2px 4px rgba(85, 84, 84, 0.4);
+  transition: background 0.5s ease;
+
+  &:hover {
+    background: linear-gradient(to right, #f7f3f3, #bfbbbb);
+    transform: scale(1.05);
+    border: 2px solid #2f2e2e;
+  }
+}
+
 @mixin invertedBlueButton {
   margin-bottom: 10px;
   display: flex;

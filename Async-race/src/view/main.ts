@@ -118,7 +118,7 @@ export class Main {
 
     this.resetButton = createElement({
       tag: 'button',
-      classList: ['race'],
+      classList: ['inactive2'],
       textContent: 'Reset'
     })
 

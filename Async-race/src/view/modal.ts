@@ -1,4 +1,4 @@
-import { createElement } from '../utils/createElement'
+import { createElementNew } from '../Utils/utils'
 // import { Music } from '../utils/Music'
 const button = 'button.mp3'
 
@@ -36,14 +36,14 @@ export class Modal {
   }
 
   create(title: string, message: string) {
-    this.overlay = createElement('div', 'overlay')
+    this.overlay = createElementNew('div', 'overlay')
     this.overlay.addEventListener('click', () => {})
     this.section.append(this.overlay)
-    this.modal = createElement('div', 'modal')
-    this.modalContent = createElement('div', 'modal-content1')
-    this.title = createElement('div', 'title', title)
-    this.message = createElement('div', 'rules1', message)
-    this.modalButton = createElement(
+    this.modal = createElementNew('div', 'modal')
+    this.modalContent = createElementNew('div', 'modal-content1')
+    this.title = createElementNew('div', 'title', title)
+    this.message = createElementNew('div', 'rules1', message)
+    this.modalButton = createElementNew(
       'button',
       'modal-button',
       'Return to the game'

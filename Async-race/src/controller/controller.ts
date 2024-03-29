@@ -93,7 +93,7 @@ export class Controller {
     })
 
     this.view.winnersPage.winNextButton.addEventListener('click', async () => {
-      if (this.currentWinPage < (await this.totalWinPages)) {
+       if (this.currentWinPage < (await this.totalWinPages)) {
         this.currentWinPage += 1
         this.view.winnersPage.pageNum.textContent = `Page # ${this.currentWinPage}`
         this.getWinnersList(this.currentWinPage, this.sortCriteria, this.sortOrder)
@@ -152,8 +152,9 @@ export class Controller {
       this.raceController = new AbortController();
       this.view.main.raceButton.disabled = true
       this.view.main.raceButton.classList.add('inactive2')
-     // this.view.main.resetButton.disabled = true
-    //  this.view.main.resetButton.classList.add('inactive2')
+      this.view.main.resetButton.disabled = false
+      this.view.main.resetButton.classList.remove('inactive2')
+      this.view.main.resetButton.classList.add('race')
       const carIdList: number[] = []
       const carsList = await this.GarageService.getCarsList(this.currentPage)
       for (let i = 0; i < carsList.length; i += 1) {
@@ -175,6 +176,8 @@ export class Controller {
       this.raceController.abort();
       this.view.main.raceButton.disabled = false
       this.view.main.raceButton.classList.remove('inactive2')
+           this.view.main.resetButton.classList.add('inactive2')
+           this.view.main.resetButton.disabled = true
       const carIdList: number[] = []
       const carsList = await this.GarageService.getCarsList(this.currentPage)
       for (let i = 0; i < carsList.length; i += 1) {
@@ -230,6 +233,7 @@ export class Controller {
           winCars.length,
           winnersList,
           winCars,
+          this.currentWinPage
         )
       } catch (error) {
         console.error('Failed to get the winners list', error)
@@ -364,14 +368,14 @@ export class Controller {
       this.view.winnersPage.winSortButton.classList.add('active')
       this.view.winnersPage.winSortButton.classList.add('visible')
       this.view.winnersPage.timeSortButton.classList.remove('visible')
-      console.log(' this.winsSortOrder',  this.winsSortOrder)
+     
     } else if (this.winsSortOrder === 'DESC') {
       this.winsSortOrder = 'ASC'
       this.sortOrder = 'ASC'
       this.view.winnersPage.winSortButton.classList.remove('active')
       this.view.winnersPage.winSortButton.classList.add('visible')
       this.view.winnersPage.timeSortButton.classList.remove('visible')
-      console.log(' this.winsSortOrder',  this.winsSortOrder)
+      
     }
     this.getWinnersList(this.currentWinPage, this.sortCriteria, this.sortOrder)
   }

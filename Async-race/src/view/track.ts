@@ -75,7 +75,7 @@ export class TrackWrapper {
 
     this.bButton = createElement({
       tag: 'button',
-      classList: ['bButton'],
+      classList: ['disabled-aButton'],
       textContent: 'B'
     })
 

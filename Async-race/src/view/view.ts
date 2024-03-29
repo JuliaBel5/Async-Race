@@ -157,6 +157,10 @@ export class View {
           this.ind = carsList[i].id.toString()
         })
         trackWrapper.aButton.addEventListener('click', async () => {
+          trackWrapper.bButton.classList.remove('disabled-aButton')
+          trackWrapper.aButton.classList.add('disabled-aButton')
+          trackWrapper.bButton.classList.add('bButton')
+          trackWrapper.aButton.classList.remove('aButton')
           const engineInfo = await this.engineService.getEnginePrams(
             carsList[i].id,
             'started'
@@ -191,6 +195,10 @@ export class View {
           animationId = requestAnimationFrame(updatePosition)
 
           trackWrapper.bButton.addEventListener('click', async () => {
+            trackWrapper.bButton.classList.add('disabled-aButton')
+            trackWrapper.bButton.classList.remove('bButton')
+            trackWrapper.aButton.classList.remove('disabled-aButton')
+            trackWrapper.aButton.classList.add('aButton')
             cancelAnimationFrame(animationId)
             startTimestamp = null
             trackWrapper.newCar.car.style.transform = `translateX(0)`
@@ -222,7 +230,7 @@ export class View {
     this.createNewCars(carList.length, carList)
   }
 
-  private async getCarId(): Promise<string> {
+  /*private async getCarId(): Promise<string> {
     const carList = await this.garageService.carList
     const num = carList.length - 1
     return carList[num].id.toString()
@@ -231,7 +239,7 @@ export class View {
   private async getCarList(): Promise<Garage[]> {
     const carList = await this.garageService.carList
     return carList
-  }
+  }*/
 
   public async raceCar(id: number, signal: AbortSignal): Promise<void | RaceResults> {
     //  объект с id и временем || undefined
