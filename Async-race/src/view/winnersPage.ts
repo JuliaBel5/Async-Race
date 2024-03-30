@@ -120,8 +120,6 @@ export class WinnersPage {
     this.titleArr[3].classList.add('with-sort-wins')
     this.titleArr[3].style.cursor = 'pointer'
 
-      
-
     this.winPrevButton = createElement({
       tag: 'button',
       classList: ['page-button'],
@@ -160,10 +158,7 @@ export class WinnersPage {
     winnersList: WinnerType[],
     winCars: Garage[],
     winPageNum: number
-    
   ): Promise<void> {
-    
-    
     while (this.table.children[5]) {
       this.table.removeChild(this.table.children[5])
     }
@@ -175,7 +170,7 @@ export class WinnersPage {
       const td1 = createElement({
         tag: 'td',
         classList: ['tableData'],
-        textContent: `${i + 1+ 10*(winPageNum-1)}`
+        textContent: `${i + 1 + 10 * (winPageNum - 1)}`
       })
       const td2 = createElement({
         tag: 'td',

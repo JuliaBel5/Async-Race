@@ -3,7 +3,11 @@ import { WinnerType, NewWinner, UpdatedWinner } from '../Utils/types'
 export class WinnerService {
   private readonly winnersURL = '/winners'
 
-  public async getWinnersList(pageNumber: number, sort: string = 'time', order: string = 'ASC'): Promise<WinnerType[]> {
+  public async getWinnersList(
+    pageNumber: number,
+    sort: string = 'time',
+    order: string = 'ASC'
+  ): Promise<WinnerType[]> {
     const response: Response = await fetch(
       `http://localhost:3000${this.winnersURL}?_page=${pageNumber}&_limit=10&_sort=${sort}&_order=${order}`,
       {
@@ -97,6 +101,4 @@ export class WinnerService {
     }
     return response.json()
   }
-
-
 }

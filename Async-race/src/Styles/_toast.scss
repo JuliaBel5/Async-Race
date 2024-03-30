@@ -9,10 +9,11 @@
   right: -300px;
   transition: right 0.5s linear;
   z-index: 1;
-  background-color: rgba(247, 236, 218, 0.8);
-  ;
+  background-color: rgba(173, 150, 113, 0.9);
+  border: 2px solid $redBook;
   border-radius: 7px;
   padding: 5px;
+
 }
 
 .toast-button-container {
@@ -28,7 +29,7 @@
   flex-direction: column;
   width: 280px;
 
-  color: rgb(28, 26, 22);
+  color: white;
   padding: 10px;
 
   align-items: center;

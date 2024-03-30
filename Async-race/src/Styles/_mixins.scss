@@ -68,18 +68,20 @@
   align-items: center;
   width: 50px;
   height: 30px;
-  border: 2px solid $blueButtonBorder;
+  border: 2px solid $greenBook;
   text-align: center;
   border-radius: 10px;
-  color: $blueColor;
-  font-weight: 400;
+  color: $greenBook;
+  font-weight: 600;
   cursor: pointer;
-  background: linear-gradient(to right, $blueSelectOption0, $selectHover);
+  background: linear-gradient(to right, rgb(247, 228, 192), rgb(233, 185, 127));
+  box-shadow: 2px 2px 4px rgba(85, 84, 84, 0.4);
   transition: background 0.5s ease;
 
   &:hover {
-    background: linear-gradient(to left, $blueSelectOption0, $selectHover);
-    border: 2px solid $blueButtonBorderHover;
+    background: linear-gradient(to left, rgb(112, 164, 112), rgb(198, 239, 198));
+    border: 2px solid yellowgreen;
+    color: white;
   }
 
   @media (max-width: 600px) {
@@ -126,12 +128,13 @@
   color: $blueColor;
   font-weight: 400;
   cursor: pointer;
-  background: linear-gradient(to left, $blueSelectOption0, $selectHover);
+  background: linear-gradient(to left, rgb(247, 228, 192), rgb(233, 185, 127));
   transition: background 0.5s ease;
 
   &:hover {
-    background: linear-gradient(to right, $blueSelectOption0, $selectHover);
-    border: 2px solid $blueButtonBorderHover;
+    background: linear-gradient(to right, rgb(112, 164, 112), rgb(198, 239, 198));
+    border: 2px solid yellowgreen;
+    color: white;
   }
 
   @media (max-width: 600px) {
@@ -146,7 +149,7 @@
   justify-content: center;
   align-items: center;
   width: 80px;
-  height: 40px;
+  height: 30px;
   border: 2px solid rgb(162, 88, 42);
   text-align: center;
   border-radius: 10px;
@@ -158,6 +161,7 @@
   background: linear-gradient(to right,
       rgb(237, 236, 225),
       rgb(239, 234, 170));
+  box-shadow: 2px 2px 4px rgba(85, 84, 84, 0.4);
   transition: background 0.5s ease;
 
   &:hover {
@@ -179,7 +183,7 @@
   justify-content: center;
   align-items: center;
   width: 80px;
-  height: 40px;
+  height: 30px;
   text-align: center;
   border-radius: 10px;
   color: $greenBook;
@@ -269,11 +273,12 @@
 
 @mixin remove {
   display: inline-flex;
-  background-color: $redBook;
+  background: linear-gradient(to left, rgb(220, 187, 133), rgb(237, 163, 150));
   border: 2px solid $greenBook;
   width: 80px;
   border-radius: 7px;
-  color: rgb(240, 237, 136);
+  color: $redBook;
+  box-shadow: 2px 2px 4px rgba(85, 84, 84, 0.4);
   height: 30px;
   text-align: center;
   font-family: Georgia, 'Times New Roman', Times, serif;
@@ -287,8 +292,9 @@
 
 
   &:hover {
-    background-color: rgb(236, 162, 101);
-    color: #e1edc4;
+    background: linear-gradient(to right, rgb(220, 187, 133), rgb(237, 163, 150));
+    color: #551616;
+    border: 2px solid rgb(5, 51, 5);
   }
 }
 
@@ -319,12 +325,12 @@
 
 @mixin generateButton {
   margin-bottom: 10px;
-  margin-left: 40px;
+  margin-left: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 150px;
-  height: 40px;
+  height: 30px;
   border: 2px solid $redBook;
   text-align: center;
   border-radius: 10px;

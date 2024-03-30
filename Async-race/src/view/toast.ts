@@ -58,11 +58,11 @@ export class Toast {
     }, duration)
   }
 
-//  bindConfirmButton = (handler: HandlerFunction) =>
-   // this.confirmButton.addEventListener('click', () => {
+  //  bindConfirmButton = (handler: HandlerFunction) =>
+  // this.confirmButton.addEventListener('click', () => {
   //    this.audio.src = 'click.mp3'
   //    this.audio.play()
-    //  handler()
-      //this.toastContainer.remove()
+  //  handler()
+  //this.toastContainer.remove()
   //  })
 }

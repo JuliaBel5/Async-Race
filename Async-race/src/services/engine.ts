@@ -5,7 +5,11 @@ import { EngineInfo, EngineResult } from '../Utils/types'
 export class EngineService {
   private readonly engineURL = '/engine'
 
-  public async getEnginePrams(id: number, status: string, signal?: AbortSignal): Promise<EngineInfo> {
+  public async getEnginePrams(
+    id: number,
+    status: string,
+    signal?: AbortSignal
+  ): Promise<EngineInfo> {
     const response: Response = await fetch(
       `http://localhost:3000${this.engineURL}?id=${id}&status=${status}`,
       {
@@ -29,7 +33,7 @@ export class EngineService {
 
   public async getEngineStatus(
     id: number,
-    status: string, 
+    status: string,
     signal?: AbortSignal
   ): Promise<EngineResult> {
     const response: Response = await fetch(
@@ -54,6 +58,7 @@ export class EngineService {
         console.error(
           "Car has been stopped suddenly. It's engine was broken down."
         )
+        throw new Error('Car engine broken down');
       }
       throw Error('Failed to get the Engine info')
     }

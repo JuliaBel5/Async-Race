@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Lobster&family=Palanquin:wght@100;200;300;400;500;600;700&family=Tillana:wght@400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import './variables';
 @import './mixins';
@@ -23,6 +23,17 @@
 
 .container1.active {
   display: none;
+}
+
+.title {
+  font-size: 30px;
+  font-family: "Palanquin", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  color: $redBook;
+  height: 50px;
+  width: 35px;
+  text-align: center;
 }
 
 .winnersContainer {
@@ -119,10 +130,19 @@ th {
 .smallButtonsWrapper {
   display: flex;
   flex-wrap: wrap;
-  width: 300px;
-  height: 30px;
+  width: 450px;
+  height: 35px;
   align-items: center;
   gap: 15px;
+}
+
+.smallButtonsWrapper1 {
+  display: flex;
+  flex-wrap: wrap;
+  width: 450px;
+  height: 35px;
+  align-items: center;
+  gap: 10px;
 }
 
 .pagesButtonsWrapper {
@@ -196,11 +216,11 @@ th {
 
 .flag::before {
   content: "";
-  border: 1px solid rgb(46, 7, 105);
+  border: 1px solid rgb(94, 51, 3);
   position: absolute;
   height: 80%;
-  top: 65%;
-  left: 5%;
+  top: 52%;
+  left: 3%;
   transform: rotate(-40deg);
 }
 
@@ -257,8 +277,10 @@ tr {
   height: fit-content;
   max-height: 50px;
   padding-top: 3%;
-  /* Calculated based on the SVG's aspect ratio */
+  /* based on the SVG's aspect ratio */
   z-index: 5;
+  background-size: cover;
+
 }
 
 svg {
@@ -287,6 +309,11 @@ svg {
 
 .brand {
   width: 150px;
+  font-family: "Palanquin", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 18px;
+  color: $redBook;
 }
 
 .input {

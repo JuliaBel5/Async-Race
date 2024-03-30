@@ -48,6 +48,8 @@ export class Main {
 
   public prevButton: HTMLButtonElement
 
+  public pageNumber: HTMLDivElement
+
   public nextButton: HTMLButtonElement
 
   public pagesButtonWrapper: HTMLDivElement
@@ -172,6 +174,12 @@ export class Main {
       textContent: 'Prev'
     })
 
+    this.pageNumber = createElement({
+      tag: 'div',
+      classList: ['title'],
+      textContent: '1'
+    })
+
     this.nextButton = createElement({
       tag: 'button',
       classList: ['page-button'],
@@ -182,7 +190,7 @@ export class Main {
       tag: 'div',
       classList: ['smallButtonsWrapper']
     })
-    this.pagesButtonWrapper.append(this.prevButton, this.nextButton)
+    this.pagesButtonWrapper.append(this.prevButton, this.pageNumber, this.nextButton)
 
     this.container.append(
       //    this.buttonsWrapper,
