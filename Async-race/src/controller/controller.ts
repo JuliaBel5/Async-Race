@@ -65,6 +65,7 @@ export class Controller {
         this.view.main.pageNum.textContent = `Page #${pageNum}`
         this.view.main.pageNumber.textContent = `${pageNum}`
         this.currentPage -= 1
+        this.view.currentPageNum = this.currentPage
 
         this.view.main.garageContainer.innerHTML = ''
         this.view.renderCars(
@@ -79,6 +80,7 @@ export class Controller {
         this.view.main.pageNum.textContent = `Page #${pageNum}`
         this.view.main.pageNumber.textContent = `${pageNum}`
         this.currentPage += 1
+        this.view.currentPageNum = this.currentPage
 
         this.view.main.garageContainer.innerHTML = ''
         this.view.renderCars(

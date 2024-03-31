@@ -10,10 +10,11 @@ body {
   height: 100vh;
   width: 100vw;
   max-width: 100%;
-  // background-image: url('beige-background.jpg');
-  background-size: cover;
-  background-repeat: repeat;
+  background-image: url('Paris1.png');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
   background-color: rgb(236, 228, 221);
+  // background-position: 70% 10%;
 
 
 }

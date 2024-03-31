@@ -32,7 +32,7 @@ export class View {
 
   public winnerService: WinnerService
 
-  public currentPageNum: null | number
+  public currentPageNum: number
 
   toast: Toast
 
@@ -47,7 +47,7 @@ export class View {
     this.winnerService = new WinnerService()
     this.engineService = new EngineService()
     this.trackWrapper = new TrackWrapper()
-    this.currentPageNum = null
+    this.currentPageNum = 1
     this.toast = new Toast()
     this.main.createCar.addEventListener('click', () => this.createNewCar())
     this.id = ''
