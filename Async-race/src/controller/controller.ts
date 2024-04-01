@@ -93,6 +93,7 @@ export class Controller {
       const secondPage = 2
       if (this.currentWinPage >= secondPage) {
         this.currentWinPage -= 1
+        this.view.winnersPage.pageNumber.textContent = `${this.currentWinPage}`
         this.view.winnersPage.pageNum.textContent = `Page # ${this.currentWinPage}`
         this.getWinnersList(
           this.currentWinPage,
@@ -105,6 +106,7 @@ export class Controller {
     this.view.winnersPage.winNextButton.addEventListener('click', async () => {
       if (this.currentWinPage < (await this.totalWinPages)) {
         this.currentWinPage += 1
+        this.view.winnersPage.pageNumber.textContent = `${this.currentWinPage}`
         this.view.winnersPage.pageNum.textContent = `Page # ${this.currentWinPage}`
         this.getWinnersList(
           this.currentWinPage,
@@ -172,6 +174,7 @@ export class Controller {
 
     this.view.main.raceButton.addEventListener('click', async () => {
       this.raceController = new AbortController()
+      this.blockButtons()
       this.view.main.raceButton.disabled = true
       this.view.main.raceButton.classList.add('inactive2')
       this.view.main.resetButton.disabled = false
@@ -182,7 +185,9 @@ export class Controller {
         el.classList.add('disabled-aButton')
         el.classList.add('temp')
         el.classList.remove('aButton')
-        if (el instanceof HTMLButtonElement) { el.disabled = true}
+        if (el instanceof HTMLButtonElement) {
+          el.disabled = true
+        }
       })
       const carIdList: number[] = []
       const carsList = await this.GarageService.getCarsList(this.currentPage)
@@ -192,18 +197,25 @@ export class Controller {
         carIdList.push(id)
       }
       this.raceController = new AbortController()
-      const raceList = await Promise.all(
-        carIdList.map((el) =>
-          this.view.trackWrapper.raceCar(el, this.raceController.signal)
+      try {
+        const raceList = await Promise.all(
+          carIdList.map((el) =>
+            this.view.trackWrapper.raceCar(el, this.raceController.signal)
+          )
         )
-      )
 
-      const winner = findWinner(raceList)
+        const winner = findWinner(raceList)
 
-      this.updateWinner(winner)
+        this.updateWinner(winner)
+      } catch (error: unknown) {
+        if (error instanceof DOMException && error.name === 'AbortError') {
+          console.log('A race was aborted.')
+        }
+      }
     })
 
     this.view.main.resetButton.addEventListener('click', async () => {
+      this.unblockButtons()
       this.raceController.abort()
       this.view.main.raceButton.disabled = false
       this.view.main.raceButton.classList.remove('inactive2')
@@ -214,7 +226,9 @@ export class Controller {
         el.classList.remove('disabled-aButton')
         el.classList.remove('temp')
         el.classList.add('aButton')
-        if (el instanceof HTMLButtonElement) { el.disabled = false}
+        if (el instanceof HTMLButtonElement) {
+          el.disabled = false
+        }
       })
       const carIdList: number[] = []
       const carsList = await this.GarageService.getCarsList(this.currentPage)
@@ -232,7 +246,7 @@ export class Controller {
         if (newEl.parentElement !== null) {
           newEl.style.transform = `translateX(0)`
           newEl.style.transitionDuration = '0.7s'
-          newEl.style.backgroundImage = '';
+          newEl.style.backgroundImage = ''
         }
       })
     })
@@ -248,17 +262,21 @@ export class Controller {
     this.sortCriteria = 'time'
 
     document.addEventListener('raceStarted', (_event) => {
-      this.view.main.raceButton.disabled = true;
-      this.view.main.raceButton.classList.add('inactive2');
-      this.view.main.resetButton.classList.remove('race');
-     });
-     
-     document.addEventListener('raceEnded', (_event) => {
-      this.view.main.raceButton.disabled = false;
-      this.view.main.raceButton.classList.remove('inactive2');
-      this.view.main.resetButton.classList.add('race');
-     });
-     
+      this.view.main.raceButton.disabled = true
+      this.view.main.raceButton.classList.add('inactive2')
+
+      this.blockButtons()
+      this.view.main.resetButton.classList.remove('race')
+    })
+
+    document.addEventListener('raceEnded', (_event) => {
+      if (this.view.trackWrapper.allCarsAreStopped()) {
+        this.view.main.raceButton.disabled = false
+        this.view.main.raceButton.classList.remove('inactive2')
+        this.view.main.resetButton.classList.add('race')
+        this.unblockButtons()
+      }
+    })
   }
 
   private async getWinnersList(
@@ -345,13 +363,15 @@ export class Controller {
 
   public async updateWinner(winner: null | RaceResults): Promise<void> {
     if (!winner) {
-      throw Error('There is no winner in this race')
+      return
     }
     try {
       const winnerName = await this.GarageService.getCar(winner.id)
       this.audio.src = 'click.mp3'
       this.audio.play()
-      this.toast.show(`The winner is ${winnerName.name} in ${winner.time/1000} sec`)
+      this.toast.show(
+        `The winner is ${winnerName.name} in ${winner.time / 1000} sec`
+      )
     } catch (error) {
       console.error('Failed to get the winner name')
     }
@@ -421,5 +441,47 @@ export class Controller {
       this.view.winnersPage.timeSortButton.classList.remove('visible')
     }
     this.getWinnersList(this.currentWinPage, this.sortCriteria, this.sortOrder)
+  }
+
+  blockButtons = () => {
+    this.view.main.prevButton.classList.add('inactivePage')
+    this.view.main.nextButton.classList.add('inactivePage')
+    this.view.main.nextButton.disabled = true
+    this.view.main.prevButton.disabled = true
+    this.view.main.updateButton.disabled = true
+    this.view.main.updateButton.classList.add('inactive')
+    this.view.main.createCar.classList.add('inactive')
+    this.view.main.generateCarsButton.classList.add('inactiveGenerate')
+    this.view.main.createCar.disabled = true
+    this.view.main.generateCarsButton.disabled = true
+    this.view.trackWrapper.selectButtonsArr.forEach((button) => {
+      button.classList.add('inactive3')
+      button.disabled = true
+    })
+    this.view.trackWrapper.removeButtonsArr.forEach((button) => {
+      button.classList.add('inactive3')
+      button.disabled = true
+    })
+  }
+
+  unblockButtons = () => {
+    this.view.main.prevButton.classList.remove('inactivePage')
+    this.view.main.nextButton.classList.remove('inactivePage')
+    this.view.main.nextButton.disabled = false
+    this.view.main.prevButton.disabled = false
+    this.view.main.updateButton.disabled = false
+    this.view.main.createCar.disabled = false
+    this.view.main.generateCarsButton.disabled = false
+    this.view.main.updateButton.classList.remove('inactive')
+    this.view.main.createCar.classList.remove('inactive')
+    this.view.main.generateCarsButton.classList.remove('inactiveGenerate')
+    this.view.trackWrapper.selectButtonsArr.forEach((button) => {
+      button.classList.remove('inactive3')
+      button.disabled = false
+    })
+    this.view.trackWrapper.removeButtonsArr.forEach((button) => {
+      button.classList.remove('inactive3')
+      button.disabled = false
+    })
   }
 }

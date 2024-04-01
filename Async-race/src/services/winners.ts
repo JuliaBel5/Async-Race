@@ -43,7 +43,7 @@ export class WinnerService {
       }
     )
     if (!response.ok) {
-      throw Error('Failed to get winners list')
+      throw Error('No winner with such id')
     }
     return response.json()
   }

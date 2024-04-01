@@ -5,11 +5,13 @@
 
 .toast-container {
   position: fixed;
-  top: 100px;
+  top: 150px;
   right: -300px;
   transition: right 0.5s linear;
   z-index: 1;
-  background-color: rgba(173, 150, 113, 0.9);
+  background: linear-gradient(to right,
+      rgba(246, 240, 228, 0.816),
+      rgba(224, 190, 170, 0.864));
   border: 2px solid $redBook;
   border-radius: 7px;
   padding: 5px;
@@ -29,7 +31,7 @@
   flex-direction: column;
   width: 280px;
 
-  color: white;
+  color: $redBook;
   padding: 10px;
 
   align-items: center;
@@ -40,7 +42,7 @@
 }
 
 .show {
-  right: 80px;
+  right: 190px;
 }
 
 .toast-confirm-button,

@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import { colorCar } from '../Utils/utils'
+import { colorCar, getRandomColor } from '../Utils/utils'
 import { Garage, NewCar } from '../Utils/types'
 import { GarageService } from '../services/garage'
 import { EngineService } from '../services/engine'
@@ -12,8 +12,6 @@ import { carBrands, carModels } from '../model/arrs'
 import { Toast } from './toast'
 
 export class View {
-  public removeButtonNameArr: HTMLElement[] = []
-
   public id: string
 
   public carsArr: HTMLElement[] = []
@@ -38,7 +36,6 @@ export class View {
 
   audio: HTMLAudioElement
   trackWrapper: TrackWrapper
-
 
   constructor() {
     this.main = new Main()
@@ -66,8 +63,7 @@ export class View {
       if (carToUpdate && carToUpdate instanceof HTMLElement) {
         colorCar(carToUpdate, newColor)
       }
-        
-     
+
       const newCarItem: NewCar = {
         name: newBrandName,
         color: newColor
@@ -96,8 +92,15 @@ export class View {
   private async createNewCar(): Promise<void> {
     // создает одну машинку
 
-    const brandName = this.main.textInput.value
-    const color = this.main.colorInput.value
+    let brandName = this.main.textInput.value
+    if (!this.main.textInput.value) {
+      brandName = this.getRandomName()
+    }
+    let color = this.main.colorInput.value
+
+    if (!this.main.textInput.value) {
+      color = getRandomColor()
+    }
     const newCarItem: NewCar = {
       name: brandName,
       color
@@ -113,13 +116,17 @@ export class View {
 
   private async createNewCars(num: number, carsList: Garage[]): Promise<void> {
     // рендер страницы
+    this.trackWrapper.selectButtonsArr = []
+    this.trackWrapper.removeButtonsArr = []
+    this.trackWrapper.aButtonsArr = []
+    this.trackWrapper.bButtonsArr = []
     try {
       const fullCarsList = await this.garageService.getFullCarsList()
       this.main.header.textContent = `Garage (${fullCarsList.length})`
 
       for (let i = 0; i < num; i += 1) {
         this.trackWrapper.createCar(carsList[i])
-          const ind: string = carsList[i].id.toString()
+        const ind: string = carsList[i].id.toString()
         this.id = ind
         if (this.trackWrapper.removeButton) {
           this.trackWrapper.removeButton.addEventListener('click', async () => {
@@ -147,7 +154,7 @@ export class View {
                 console.error('Failed to delete your car, try again', error)
               }
             }
-             this.main.garageContainer.innerHTML = ''
+            this.main.garageContainer.innerHTML = ''
             await this.renderCars(
               this.garageService.getCarsList(this.currentPageNum)
             )
@@ -162,7 +169,7 @@ export class View {
             }
           })
         }
-        
+
         if (this.trackWrapper.newCar && this.trackWrapper.trackWrapper) {
           this.carsArr.push(this.trackWrapper.newCar.car)
           this.main.garageContainer.append(this.trackWrapper.trackWrapper)
@@ -208,5 +215,4 @@ export class View {
     }
   }
 */
-
 }

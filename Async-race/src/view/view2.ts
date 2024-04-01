@@ -32,9 +32,9 @@ export class Main {
 
   public container: HTMLElement
 
-  public createCar: HTMLElement
+  public createCar: HTMLButtonElement
 
-  public updateButton: HTMLElement
+  public updateButton: HTMLButtonElement
 
   public buttonsWrapper: HTMLElement
 
@@ -62,7 +62,7 @@ export class Main {
 
   constructor() {
     this.garageService = new GarageService()
-    this.root = document.querySelector('body')
+    this.root = document.body
     this.pageHeader = new Header()
     this.pageHeader.init()
     this.container = createElement({
@@ -190,7 +190,11 @@ export class Main {
       tag: 'div',
       classList: ['smallButtonsWrapper']
     })
-    this.pagesButtonWrapper.append(this.prevButton, this.pageNumber, this.nextButton)
+    this.pagesButtonWrapper.append(
+      this.prevButton,
+      this.pageNumber,
+      this.nextButton
+    )
 
     this.container.append(
       //    this.buttonsWrapper,

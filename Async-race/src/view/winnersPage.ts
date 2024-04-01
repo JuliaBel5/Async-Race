@@ -19,7 +19,7 @@ export class WinnersPage {
 
   public linesArr: HTMLElement[] = []
 
-  public root: HTMLBodyElement | null
+  public root: HTMLElement | null
 
   public container: HTMLDivElement
 
@@ -46,12 +46,13 @@ export class WinnersPage {
   timeSortButton: HTMLDivElement
 
   winSortButton: HTMLDivElement
+  pageNumber: HTMLDivElement
 
   // winCarsArr: WinnerType[]
 
   constructor() {
     this.garageService = new GarageService()
-    this.root = document.querySelector('body')
+    this.root = document.body
 
     this.container = createElement({
       tag: 'div',
@@ -125,6 +126,11 @@ export class WinnersPage {
       classList: ['page-button'],
       textContent: 'Prev'
     })
+    this.pageNumber = createElement({
+      tag: 'div',
+      classList: ['title'],
+      textContent: '1'
+    })
 
     this.winNextButton = createElement({
       tag: 'button',
@@ -136,7 +142,11 @@ export class WinnersPage {
       tag: 'div',
       classList: ['pagesButtonsWrapper']
     })
-    this.winPagesButtonWrapper.append(this.winPrevButton, this.winNextButton)
+    this.winPagesButtonWrapper.append(
+      this.winPrevButton,
+      this.pageNumber,
+      this.winNextButton
+    )
 
     if (this.root) {
       this.root.append(this.container)

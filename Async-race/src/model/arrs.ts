@@ -1,5 +1,3 @@
-export const removeButtonNameArr: HTMLElement[] = []
-
 export const carBrands = [
   'Tesla',
   'Volvo',

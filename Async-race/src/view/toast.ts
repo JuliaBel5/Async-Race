@@ -49,7 +49,7 @@ export class Toast {
     })
   }
 
-  public show = (message: string, duration = 3000): void => {
+  public show = (message: string, duration = 5000): void => {
     this.toastContainer.classList.add('show')
     this.toast.textContent = message
 

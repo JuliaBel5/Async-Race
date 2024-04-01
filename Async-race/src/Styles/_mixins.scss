@@ -19,8 +19,8 @@
   font-size: 22px;
   cursor: pointer;
   background: linear-gradient(to right,
-      rgba(246, 240, 228, 0.216),
-      rgba(235, 175, 140, 0.164));
+      rgba(246, 240, 228, 0.816),
+      rgba(224, 190, 170, 0.864));
   box-shadow: 2px 2px 4px rgba(85, 84, 84, 0.4);
   transition: background 0.5s ease;
 
@@ -80,7 +80,7 @@
 
   &:hover {
     background: linear-gradient(to left, rgb(112, 164, 112), rgb(198, 239, 198));
-    border: 2px solid yellowgreen;
+    border: 2px solid orange;
     color: white;
   }
 
@@ -133,7 +133,7 @@
 
   &:hover {
     background: linear-gradient(to right, rgb(112, 164, 112), rgb(198, 239, 198));
-    border: 2px solid yellowgreen;
+    border: 2px solid orange;
     color: white;
   }
 
@@ -166,8 +166,7 @@
 
   &:hover {
     background: linear-gradient(to left,
-        rgb(237, 236, 225),
-        rgb(239, 234, 170));
+        rgb(112, 164, 112), rgb(198, 239, 198));
     border: 2px solid orange;
   }
 
@@ -298,23 +297,12 @@
   }
 }
 
-@mixin disabled {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 80px;
-  height: 30px;
+@mixin disabledRemove {
+
   border: 2px solid #888787;
-  text-align: center;
-  border-radius: 7px;
   color: #666666;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-weight: 600;
-  font-size: 16px;
-  display: inline-block;
   cursor: not-allowed;
   background: linear-gradient(to left, #f7f3f3, #bfbbbb);
-  margin: 20px 20px;
   transition: background 0.5s ease;
 
   &:hover {
@@ -354,6 +342,21 @@
     border: 2px solid rgba(151, 6, 40, 0.9);
   }
 }
+
+@mixin disabledGenerate {
+
+  border: 2px solid #888787;
+  color: #666666;
+  cursor: not-allowed;
+  background: linear-gradient(to left, #f7f3f3, #bfbbbb);
+  transition: background 0.5s ease;
+
+  &:hover {
+    background: linear-gradient(to right, #f7f3f3, #bfbbbb);
+    border: 2px solid #2f2e2e;
+  }
+}
+
 
 @mixin carWheelButton {
   background: linear-gradient(to bottom, #333, #666);

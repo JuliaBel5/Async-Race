@@ -22,6 +22,7 @@ export class Header {
   garageContainer: HTMLDivElement | undefined
 
   winnersContainer: HTMLDivElement | undefined
+  headerOverlay: HTMLDivElement | undefined
 
   constructor() {
     this.element = document.body
@@ -30,6 +31,7 @@ export class Header {
   }
 
   init(): void {
+    this.headerOverlay = createElementNew('div', 'header-opacity')
     this.garageContainer = createElementNew('div', 'icon-container')
     this.winnersContainer = createElementNew('div', 'icon-container')
     this.winnersIcon = createElementNew('img', 'icon1')
@@ -69,7 +71,12 @@ export class Header {
     this.garageContainer.append(this.garageButton, this.garageIcon)
     this.winnersContainer.append(this.winnersButton, this.winnersIcon)
     this.header.style.justifyContent = 'space-between'
-    this.header.append(this.garageContainer, title, this.winnersContainer)
+    this.header.append(this.headerOverlay)
+    this.headerOverlay.append(
+      this.garageContainer,
+      title,
+      this.winnersContainer
+    )
     this.element.append(this.header)
   }
 
@@ -83,6 +90,11 @@ export class Header {
     if (this.garageButton) {
       this.garageButton.addEventListener('click', () => {
         handler()
+        if (this.audio) {
+          this.audio.src = 'garage1.mp3'
+          this.audio.volume = 0.3
+          this.audio.play()
+        }
       })
     }
   }
@@ -91,6 +103,11 @@ export class Header {
     if (this.winnersButton) {
       this.winnersButton.addEventListener('click', () => {
         handler()
+        if (this.audio) {
+          this.audio.src = 'winners.mp3'
+          this.audio.volume = 0.3
+          this.audio.play()
+        }
       })
     }
   }
