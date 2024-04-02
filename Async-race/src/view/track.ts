@@ -253,14 +253,20 @@ export class TrackWrapper {
       )
 
       const car = document.getElementById(id.toString())
-      if (car) {
+      if (car && this.flag) {
         const carWrapper: HTMLElement | null = car.parentElement
         if (!carWrapper) {
           throw Error('There is no track')
         }
         const carWrapperRect = carWrapper.getBoundingClientRect()
-        const width = carWrapperRect.width * 0.93
-        const time = Math.round(engineInfo.distance / engineInfo.velocity)
+       const flagRect = this.flag.getBoundingClientRect()
+        const flagRatio = flagRect.width * 100 / carWrapperRect.width
+       const width = carWrapperRect.width * 0.83 //100%
+       const carRect = car.getBoundingClientRect()
+    
+        const ratio:number = width / carRect.width
+       
+                const time = Math.round(engineInfo.distance / engineInfo.velocity)
         const animationTime = time
         let startTimestamp: number | null
         let animationId: number
@@ -273,7 +279,7 @@ export class TrackWrapper {
           const progress = Math.min(elapsedTime / animationTime, 1)
           currentPosition = progress * width
           currentPositionInPercent = (currentPosition * 100) / width
-          car.style.transform = `translateX(${currentPositionInPercent * 9}%)`
+          car.style.transform = `translateX(${currentPositionInPercent * 5.53}%)`
           if (progress < 1) {
             animationId = requestAnimationFrame(updatePosition)
           } else {

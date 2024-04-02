@@ -220,13 +220,15 @@ th {
 
 .flag {
 
-  width: 12%;
+  width: 15%;
   position: absolute;
   top: -165%;
-  left: 87%;
+  left: 82%;
   z-index: 10;
 
 }
+
+
 
 .flag-img {
   height: 120px;
@@ -242,6 +244,7 @@ th {
   top: 70%;
   left: 3%;
   transform: rotate(-40deg);
+  z-index: 2;
 }
 
 .button {
@@ -300,7 +303,8 @@ tr {
 
 .car {
   position: relative;
-  width: 10%;
+  width: 15%;
+
   height: fit-content;
   max-height: 50px;
   padding-top: 3%;
@@ -311,10 +315,12 @@ tr {
 }
 
 
+
 svg {
   position: absolute;
   z-index: 5;
   max-height: 90%;
+  max-width: 150px;
   left: 0;
   top: 0;
 }
