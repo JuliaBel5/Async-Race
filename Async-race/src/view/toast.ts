@@ -1,6 +1,6 @@
 import { createElementNew } from '../Utils/utils'
 
-//type HandlerFunction = () => void
+// type HandlerFunction = () => void
 
 export class Toast {
   toastContainer: HTMLElement
@@ -63,6 +63,6 @@ export class Toast {
   //    this.audio.src = 'click.mp3'
   //    this.audio.play()
   //  handler()
-  //this.toastContainer.remove()
+  // this.toastContainer.remove()
   //  })
 }

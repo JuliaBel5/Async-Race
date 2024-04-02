@@ -33,12 +33,19 @@ export class Controller {
   private readonly carsPerPage: number
 
   private readonly winnersPerPage: number
+
   winsSortOrder: string
+
   timeSortOrder: string
+
   sortCriteria: string
+
   sortOrder: string
+
   raceController: AbortController = new AbortController()
+
   toast: Toast
+
   audio: HTMLAudioElement
 
   constructor(view: View) {

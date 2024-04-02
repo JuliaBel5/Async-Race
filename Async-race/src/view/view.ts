@@ -35,6 +35,7 @@ export class View {
   toast: Toast
 
   audio: HTMLAudioElement
+
   trackWrapper: TrackWrapper
 
   constructor() {
@@ -188,9 +189,9 @@ export class View {
   /* public async stop(id: number) {
     await this.engineService.getEnginePrams(id, 'stopped');
     
-   }*/
+   } */
 
-  /*private async getCarId(): Promise<string> {
+  /* private async getCarId(): Promise<string> {
     const carList = await this.garageService.carList
     const num = carList.length - 1
     return carList[num].id.toString()
@@ -199,7 +200,7 @@ export class View {
   private async getCarList(): Promise<Garage[]> {
     const carList = await this.garageService.carList
     return carList
-  }*/
+  } */
 
   /* public async launchAll(): Promise<void> {
     const idArr: number[] = []

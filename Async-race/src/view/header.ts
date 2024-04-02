@@ -22,6 +22,7 @@ export class Header {
   garageContainer: HTMLDivElement | undefined
 
   winnersContainer: HTMLDivElement | undefined
+
   headerOverlay: HTMLDivElement | undefined
 
   constructor() {

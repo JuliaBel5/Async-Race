@@ -1,9 +1,8 @@
-/* eslint-disable max-lines-per-function */
-
 import { svgImage } from '../model/svg'
 import { createElement, colorCar } from '../Utils/utils'
 import { Garage, WinnerType } from '../Utils/types'
 import { GarageService } from '../services/garage'
+
 type HandlerFunction = () => void
 
 export class WinnersPage {
@@ -46,6 +45,7 @@ export class WinnersPage {
   timeSortButton: HTMLDivElement
 
   winSortButton: HTMLDivElement
+
   pageNumber: HTMLDivElement
 
   // winCarsArr: WinnerType[]

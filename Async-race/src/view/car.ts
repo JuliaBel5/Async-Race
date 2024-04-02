@@ -8,7 +8,9 @@ export class Car {
   newCar: HTMLDivElement | undefined
 
   car: HTMLDivElement
+
   engineService: EngineService
+
   animationId: number
 
   constructor() {
@@ -82,6 +84,7 @@ export class Car {
       }
     }
   }
+
   colorCar(el: HTMLElement, color: string): void {
     const paths1 = el.querySelectorAll('path')
     paths1[28].style.fill = chroma(color).saturate().hex()

@@ -24,16 +24,27 @@ export class TrackWrapper {
   public brand: HTMLDivElement | undefined
 
   public garageService: GarageService
+
   public newCar: Car | undefined
+
   public flagImg: HTMLImageElement | undefined
+
   public raceController: AbortController | undefined
+
   public audio: HTMLAudioElement
+
   public carData: Garage | undefined
+
   engineService: EngineService
+
   counter: number
+
   selectButtonsArr: HTMLButtonElement[]
+
   removeButtonsArr: HTMLButtonElement[]
+
   aButtonsArr: HTMLButtonElement[]
+
   bButtonsArr: HTMLButtonElement[]
 
   constructor() {
@@ -46,6 +57,7 @@ export class TrackWrapper {
     this.aButtonsArr = []
     this.bButtonsArr = []
   }
+
   public createCar(carData: Garage) {
     this.carData = carData
     this.trackWrapper = createElement({
@@ -117,7 +129,7 @@ export class TrackWrapper {
     })
 
     this.flagImg.src = 'reverbere.png'
-    //'flag.png'
+    // 'flag.png'
 
     this.flag.append(this.flagImg)
 
@@ -147,12 +159,12 @@ export class TrackWrapper {
       const raceStartedEvent = new CustomEvent('raceStarted')
       document.dispatchEvent(raceStartedEvent)
       raceController = new AbortController()
-      console.log(this.selectButtonsArr, 'this.selectButtonsArr')
+
       this.selectButtonsArr.forEach((button) => {
         button.classList.add('inactive3')
         button.disabled = true
       })
-      console.log(this.removeButtonsArr, 'this.removeButtonsArr')
+
       this.removeButtonsArr.forEach((button) => {
         button.classList.add('inactive3')
         button.disabled = true

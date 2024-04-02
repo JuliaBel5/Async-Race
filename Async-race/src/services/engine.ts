@@ -15,7 +15,7 @@ export class EngineService {
         `http://localhost:3000${this.engineURL}?id=${id}&status=${status}`,
         {
           method: 'PATCH',
-          signal: signal
+          signal
         }
       )
       if (!response.ok) {
@@ -29,7 +29,7 @@ export class EngineService {
         }
         throw Error('Failed to get the Engine info')
       }
-      return response.json()
+      return await response.json()
     } catch (error: unknown) {
       if (error instanceof DOMException && error.name === 'AbortError') {
         console.log('The request was aborted.')
@@ -50,7 +50,7 @@ export class EngineService {
         `http://localhost:3000${this.engineURL}/?id=${id}&status=${status}`,
         {
           method: 'PATCH',
-          signal: signal
+          signal
         }
       )
       if (!response.ok) {
@@ -72,7 +72,7 @@ export class EngineService {
         }
         throw Error('Failed to get the Engine info')
       }
-      return response.json()
+      return await response.json()
     } catch (error: unknown) {
       if (error instanceof DOMException && error.name === 'AbortError') {
         console.log('The request was aborted.')
