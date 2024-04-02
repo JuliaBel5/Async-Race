@@ -252,10 +252,28 @@ th {
   @include startButton;
 }
 
+.headerButton {
+  @include headerButton;
+}
+
+.inactiveHeader {
+  @include disabledHeader;
+}
+
 .colorInput {
   height: 30px;
   border-radius: 5px;
   border: 2px solid $greenBook;
+}
+
+.preview {
+  position: relative;
+  height: 30px;
+  margin-bottom: 0;
+  width: 100px;
+  margin-left: 10px;
+
+  border-radius: 5px;
 }
 
 .inactive {

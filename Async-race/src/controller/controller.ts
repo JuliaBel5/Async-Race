@@ -141,11 +141,17 @@ export class Controller {
         ) {
           this.view.winnersPage.container.classList.toggle('active')
           this.view.main.container.classList.toggle('active')
-          this.view.main.pageHeader.winnersButton.classList.add('inactive')
+          this.view.main.pageHeader.winnersButton.classList.add(
+            'inactiveHeader'
+          )
           this.view.main.pageHeader.winnersButton.disabled = true
-          this.view.main.pageHeader.winnersButton?.classList.remove('button')
-          this.view.main.pageHeader.garageButton?.classList.add('button')
-          this.view.main.pageHeader.garageButton?.classList.remove('inactive')
+          this.view.main.pageHeader.winnersButton?.classList.remove(
+            'headerButton'
+          )
+          this.view.main.pageHeader.garageButton?.classList.add('headerButton')
+          this.view.main.pageHeader.garageButton?.classList.remove(
+            'inactiveHeader'
+          )
           this.view.main.pageHeader.garageButton.disabled = false
           this.getWinnersList(
             this.currentWinPage,
@@ -164,11 +170,17 @@ export class Controller {
         ) {
           this.view.main.container.classList.toggle('active')
           this.view.winnersPage.container.classList.toggle('active')
-          this.view.main.pageHeader.winnersButton?.classList.add('button')
-          this.view.main.pageHeader.garageButton?.classList.add('inactive')
+          this.view.main.pageHeader.winnersButton?.classList.add('headerButton')
+          this.view.main.pageHeader.garageButton?.classList.add(
+            'inactiveHeader'
+          )
           this.view.main.pageHeader.garageButton.disabled = true
-          this.view.main.pageHeader.winnersButton?.classList.remove('inactive')
-          this.view.main.pageHeader.garageButton?.classList.remove('button')
+          this.view.main.pageHeader.winnersButton?.classList.remove(
+            'inactiveHeader'
+          )
+          this.view.main.pageHeader.garageButton?.classList.remove(
+            'headerButton'
+          )
           this.view.main.pageHeader.winnersButton.disabled = false
         }
       })

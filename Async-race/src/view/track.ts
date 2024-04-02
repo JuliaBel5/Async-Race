@@ -259,14 +259,14 @@ export class TrackWrapper {
           throw Error('There is no track')
         }
         const carWrapperRect = carWrapper.getBoundingClientRect()
-       const flagRect = this.flag.getBoundingClientRect()
-        const flagRatio = flagRect.width * 100 / carWrapperRect.width
-       const width = carWrapperRect.width * 0.83 //100%
-       const carRect = car.getBoundingClientRect()
-    
-        const ratio:number = width / carRect.width
-       
-                const time = Math.round(engineInfo.distance / engineInfo.velocity)
+        // const flagRect = this.flag.getBoundingClientRect()
+        //   const flagRatio = flagRect.width * 100 / carWrapperRect.width
+        const width = carWrapperRect.width * 0.83 //100%
+        //    const carRect = car.getBoundingClientRect()
+
+        //   const ratio:number = width / carRect.width
+
+        const time = Math.round(engineInfo.distance / engineInfo.velocity)
         const animationTime = time
         let startTimestamp: number | null
         let animationId: number

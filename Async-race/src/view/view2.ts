@@ -1,5 +1,6 @@
 /* eslint-disable max-lines-per-function */
-import { createElement } from '../Utils/utils'
+import { colorCar, createElement } from '../Utils/utils'
+import { svgImage } from '../model/svg'
 import { GarageService } from '../services/garage'
 import { Header } from './header'
 
@@ -59,6 +60,12 @@ export class Main {
   public pageHeader: Header
 
   public pageNum: HTMLDivElement
+  svgCar: string
+  preview: HTMLDivElement
+  color: string
+  preview2: HTMLDivElement
+  svgCar2: string | undefined
+  color2: string
 
   constructor() {
     this.garageService = new GarageService()
@@ -154,7 +161,32 @@ export class Main {
       tag: 'input',
       classList: ['colorInput']
     })
+
+    this.svgCar = svgImage
     this.colorInput2.setAttribute('type', 'color')
+    this.preview = createElement({
+      tag: 'div',
+      classList: ['preview'],
+      innerHTML: this.svgCar
+    })
+    this.color = `rgba(255, 255, 255, 0.1)`
+    colorCar(this.preview, this.color)
+    this.colorInput.addEventListener('input', () => {
+      colorCar(this.preview, this.colorInput.value)
+    })
+
+    this.svgCar2 = svgImage
+    this.colorInput2.setAttribute('type', 'color')
+    this.preview2 = createElement({
+      tag: 'div',
+      classList: ['preview'],
+      innerHTML: this.svgCar2
+    })
+    this.color2 = `rgba(255, 255, 255, 0.1)`
+    colorCar(this.preview2, this.color2)
+    this.colorInput2.addEventListener('input', () => {
+      colorCar(this.preview2, this.colorInput2.value)
+    })
 
     this.header = createElement({
       tag: 'div',
@@ -211,9 +243,11 @@ export class Main {
       this.textInput,
       this.colorInput,
       this.createCar,
+      this.preview,
       this.updateInput,
       this.colorInput2,
-      this.updateButton
+      this.updateButton,
+      this.preview2
     )
 
     this.buttonsWrapper2.append(

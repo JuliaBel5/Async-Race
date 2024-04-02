@@ -67,8 +67,16 @@ export class Header {
       }
     })
 
-    this.garageButton = createElementNew('button', 'inactive', 'To Garage')
-    this.winnersButton = createElementNew('button', 'button', 'To Winners')
+    this.garageButton = createElementNew(
+      'button',
+      'inactiveHeader',
+      'To Garage'
+    )
+    this.winnersButton = createElementNew(
+      'button',
+      'headerButton',
+      'To Winners'
+    )
     this.garageContainer.append(this.garageButton, this.garageIcon)
     this.winnersContainer.append(this.winnersButton, this.winnersIcon)
     this.header.style.justifyContent = 'space-between'

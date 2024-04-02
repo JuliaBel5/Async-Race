@@ -8,7 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 130px;
+  width: 100px;
   height: 30px;
   border: 2px solid $redBook;
   text-align: center;
@@ -36,6 +36,64 @@
 
 
 @mixin disabledStart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  border-radius: 10px;
+  color: $greenBook;
+  font-family: 'Gochi Hand', cursive;
+  font-weight: 400;
+  font-size: 22px;
+  border: 2px solid #888787;
+  color: #666666;
+  cursor: not-allowed;
+  background: linear-gradient(to left, #f7f3f3, #bfbbbb);
+  box-shadow: 2px 2px 4px rgba(85, 84, 84, 0.4);
+  transition: background 0.5s ease;
+
+  &:hover {
+    background: linear-gradient(to right, #f7f3f3, #bfbbbb);
+    transform: scale(1.05);
+    border: 2px solid #2f2e2e;
+  }
+}
+
+@mixin headerButton {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 130px;
+  height: 30px;
+  border: 2px solid $redBook;
+  text-align: center;
+  border-radius: 10px;
+  color: $greenBook;
+  font-family: 'Gochi Hand', cursive;
+  font-weight: 400;
+  font-size: 22px;
+  cursor: pointer;
+  background: linear-gradient(to right,
+      rgba(246, 240, 228, 0.816),
+      rgba(224, 190, 170, 0.864));
+  box-shadow: 2px 2px 4px rgba(85, 84, 84, 0.4);
+  transition: background 0.5s ease;
+
+  &:hover {
+    background: linear-gradient(to left,
+        rgba(246, 240, 228, 0.216),
+        rgba(230, 184, 158, 0.164));
+    color: green;
+    transform: scale(1.05);
+    border: 2px solid rgba(151, 6, 40, 0.9);
+  }
+}
+
+
+@mixin disabledHeader {
   display: flex;
   justify-content: center;
   align-items: center;

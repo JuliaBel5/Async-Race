@@ -69,6 +69,9 @@ export class View {
         name: newBrandName,
         color: newColor
       }
+      this.main.colorInput2.value = `rgba(255, 255, 255, 0.1)`
+      this.main.updateInput.value = ''
+      colorCar(this.main.preview2, `rgba(255, 255, 255, 0.1)`)
       try {
         await this.garageService.updateCar(newCarItem, Number(this.id))
         this.main.garageContainer.innerHTML = ''
@@ -99,13 +102,16 @@ export class View {
     }
     let color = this.main.colorInput.value
 
-    if (!this.main.textInput.value) {
+    if (!this.main.colorInput.value) {
       color = getRandomColor()
     }
     const newCarItem: NewCar = {
       name: brandName,
       color
     }
+    this.main.colorInput.value = `rgba(255, 255, 255, 0.1)`
+    this.main.textInput.value = ''
+    colorCar(this.main.preview, `rgba(255, 255, 255, 0.1)`)
     try {
       await this.garageService.createCar(newCarItem)
       this.main.garageContainer.innerHTML = ''
