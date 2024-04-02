@@ -225,8 +225,10 @@ export class Controller {
             this.view.trackWrapper.raceCar(el, this.raceController.signal)
           )
         )
-
-        const winner = findWinner(raceList)
+        
+      //  const winner = raceList
+       // console.log(raceList, 'raceList', winner, 'winner')
+       const winner = findWinner(raceList)
 
         this.updateWinner(winner)
       } catch (error: unknown) {
@@ -385,6 +387,7 @@ export class Controller {
 
   public async updateWinner(winner: null | RaceResults): Promise<void> {
     if (!winner) {
+      console.log('no winner')
       return
     }
     try {

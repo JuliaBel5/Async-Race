@@ -37,6 +37,7 @@ export class View {
   audio: HTMLAudioElement
 
   trackWrapper: TrackWrapper
+  carIsSelected: boolean
 
   constructor() {
     this.main = new Main()
@@ -50,11 +51,12 @@ export class View {
     this.main.createCar.addEventListener('click', () => this.createNewCar())
     this.id = ''
     this.audio = new Audio()
+    this.carIsSelected = false
 
     this.main.updateButton.addEventListener('click', async () => {
       this.audio.src = 'click.mp3'
       this.audio.play()
-      if (!this.main.updateInput.value) {
+      if (!this.main.updateInput.value || !this.carIsSelected) {
         this.toast.show('Please, first select a car to update')
         return
       }
@@ -72,6 +74,7 @@ export class View {
       this.main.colorInput2.value = '#ECE4D3'
       this.main.updateInput.value = ''
       colorCar(this.main.preview2, `rgba(255, 255, 255, 0.1)`)
+      this.carIsSelected = false
       try {
         await this.garageService.updateCar(newCarItem, Number(this.id))
         this.main.garageContainer.innerHTML = ''
@@ -171,6 +174,7 @@ export class View {
           this.trackWrapper.selectButton.addEventListener('click', () => {
             if (this.trackWrapper.carData) {
               this.id = this.trackWrapper.carData.id.toString()
+              this.carIsSelected = true
               this.main.colorInput2.value = this.trackWrapper.carData.color
               this.main.updateInput.value = this.trackWrapper.carData.name
             }
