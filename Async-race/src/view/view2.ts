@@ -143,7 +143,8 @@ export class Main {
     })
 
     this.colorInput.setAttribute('type', 'color')
-
+    this.colorInput.value = '#ECE4D3'
+    
     this.textInput = createElement({
       tag: 'input',
       classList: ['input']
@@ -161,7 +162,7 @@ export class Main {
       tag: 'input',
       classList: ['colorInput']
     })
-
+    this.colorInput2.value = '#ECE4D3'
     this.svgCar = svgImage
     this.colorInput2.setAttribute('type', 'color')
     this.preview = createElement({

@@ -65,12 +65,13 @@ export class Controller {
     this.audio = new Audio()
     //  this.toast.bindConfirmButton(this.showToast)
     this.view.main.prevButton.addEventListener('click', async () => {
-      this.getPageNumber()
+      const totalPages = await this.getPageNumber()
       const secondPage = 2
       if (this.currentPage >= secondPage) {
         const pageNum = this.currentPage - 1
         this.view.main.pageNum.textContent = `Page #${pageNum}`
-        this.view.main.pageNumber.textContent = `${pageNum}`
+        this.view.main.pageNumber.textContent = `${pageNum}/${totalPages}`
+        this.view.main.pageNumber.style.width = `60px`
         this.currentPage -= 1
         this.view.currentPageNum = this.currentPage
 
@@ -84,8 +85,10 @@ export class Controller {
     this.view.main.nextButton.addEventListener('click', async () => {
       if (this.currentPage < (await this.getPageNumber())) {
         const pageNum = this.currentPage + 1
+        const totalPages = await this.getPageNumber()
         this.view.main.pageNum.textContent = `Page #${pageNum}`
-        this.view.main.pageNumber.textContent = `${pageNum}`
+        this.view.main.pageNumber.textContent = `${pageNum}/${totalPages}`
+                this.view.main.pageNumber.style.width = `60px`
         this.currentPage += 1
         this.view.currentPageNum = this.currentPage
 
