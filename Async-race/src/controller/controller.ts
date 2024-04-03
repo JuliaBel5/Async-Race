@@ -2,7 +2,7 @@
 /* eslint-disable max-lines-per-function */
 
 import { View } from '../view/view'
-import { findWinner, getRandomColor } from '../Utils/utils'
+import { getRandomColor } from '../Utils/utils'
 import { NewCar, RaceResults } from '../Utils/types'
 import { GarageService } from '../services/garage'
 import { WinnerService } from '../services/winners'
@@ -220,20 +220,25 @@ export class Controller {
       }
       this.raceController = new AbortController()
       try {
-        const raceList = await Promise.all(
+        const raceList = await Promise.any(
           carIdList.map((el) =>
             this.view.trackWrapper.raceCar(el, this.raceController.signal)
           )
         )
+   
+        const winner = raceList
         
-      //  const winner = raceList
-       // console.log(raceList, 'raceList', winner, 'winner')
-       const winner = findWinner(raceList)
+      // const winner = findWinner(raceList)
 
         this.updateWinner(winner)
       } catch (error: unknown) {
         if (error instanceof DOMException && error.name === 'AbortError') {
           console.log('A race was aborted.')
+        }
+        if (error instanceof Error) {
+          if (error.message === 'Car engine broken down') {
+            console.log("The car engine was broken")
+          }
         }
       }
     })
@@ -387,8 +392,7 @@ export class Controller {
 
   public async updateWinner(winner: null | RaceResults): Promise<void> {
     if (!winner) {
-      console.log('no winner')
-      return
+        return
     }
     try {
       const winnerName = await this.GarageService.getCar(winner.id)

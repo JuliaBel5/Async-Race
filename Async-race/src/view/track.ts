@@ -173,14 +173,29 @@ export class TrackWrapper {
         aButton.classList.add('disabled-aButton')
         aButton.disabled = true
         aButton.classList.remove('aButton')
-
-        if (this.newCar) {
-          this.raceCar(carData.id, raceController.signal)
-        }
-
         bButton.classList.remove('disabled-aButton')
         bButton.disabled = false
         bButton.classList.add('bButton')
+
+        if (this.newCar) {
+          try {
+          await this.raceCar(carData.id, raceController.signal)
+          }   catch (error: unknown) {
+            
+            if (error instanceof DOMException && error.name === 'AbortError') {
+              console.log('The race was aborted.')
+            }
+            if (error instanceof Error) {
+              
+              if (error.message === 'Car engine broken down') {
+                console.log("The car engine was broken")
+              }
+            }
+          }
+          
+        }
+
+       
       }
     })
     bButton.addEventListener('click', async () => {
@@ -231,12 +246,6 @@ export class TrackWrapper {
       )
       this.aButtonsArr = this.aButtonsArr.filter((button) => button !== aButton)
       this.bButtonsArr = this.bButtonsArr.filter((button) => button !== bButton)
-      console.log(
-        this.selectButtonsArr,
-        this.removeButtonsArr,
-        this.aButtonsArr,
-        this.bButtonsArr
-      )
       this.carData = carData
     })
   }
@@ -298,22 +307,25 @@ export class TrackWrapper {
           if (error instanceof Error) {
             if (error.message === 'Car engine broken down') {
               car.style.backgroundImage = `url('fire.png')`
+              throw new Error('Car engine broken down')
             }
             if (error instanceof DOMException) {
-              console.log('A race was aborted by user.')
+              throw new Error('This race was aborted by user.')
             }
+           //throw error; 
           }
-          return undefined
+        //  return undefined
+        
         }
       }
     } catch (error: unknown) {
       if (error instanceof DOMException) {
-        console.log('A race was aborted by user.')
-      } else {
-        console.log('A race was aborted by user.')
-      }
+      throw new Error('This race was aborted by user 2.')
+      } 
+      throw error; 
     }
-    return undefined
+ 
+  //  return undefined
   }
 
   getCurrentCarData() {

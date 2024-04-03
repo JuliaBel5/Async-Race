@@ -75,10 +75,11 @@ export class EngineService {
       return await response.json()
     } catch (error: unknown) {
       if (error instanceof DOMException && error.name === 'AbortError') {
-        console.log('The request was aborted.')
-      } else if (error instanceof Error) {
-        console.log(`Fetch error: ${error.message}`)
-      }
+        console.log('The drive request was aborted.')
+      } 
+      //else if (error instanceof Error) {
+     //   console.log(`Fetch error: ${error.message}`)
+     // }
       throw error
     }
   }
