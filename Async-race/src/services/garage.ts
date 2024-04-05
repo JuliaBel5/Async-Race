@@ -20,7 +20,7 @@ export class GarageService {
     if (!response.ok) {
       throw Error('Failed to get cars list')
     }
-    return response.json()
+      return response.json()
   }
 
   public async getFullCarsList(): Promise<Garage[]> {

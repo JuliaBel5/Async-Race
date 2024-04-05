@@ -129,7 +129,7 @@ export class WinnersPage {
     this.pageNumber = createElement({
       tag: 'div',
       classList: ['title'],
-      textContent: '1'
+      textContent: '1/1'
     })
 
     this.winNextButton = createElement({

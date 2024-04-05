@@ -103,7 +103,7 @@ export class Controller {
       const secondPage = 2
       if (this.currentWinPage >= secondPage) {
         this.currentWinPage -= 1
-        this.view.winnersPage.pageNumber.textContent = `${this.currentWinPage}`
+        this.view.winnersPage.pageNumber.textContent = `${this.currentWinPage}/${await this.totalWinPages}`
         this.view.winnersPage.pageNum.textContent = `Page # ${this.currentWinPage}`
         this.getWinnersList(
           this.currentWinPage,
@@ -116,7 +116,7 @@ export class Controller {
     this.view.winnersPage.winNextButton.addEventListener('click', async () => {
       if (this.currentWinPage < (await this.totalWinPages)) {
         this.currentWinPage += 1
-        this.view.winnersPage.pageNumber.textContent = `${this.currentWinPage}`
+        this.view.winnersPage.pageNumber.textContent =`${this.currentWinPage}/${await this.totalWinPages}`
         this.view.winnersPage.pageNum.textContent = `Page # ${this.currentWinPage}`
         this.getWinnersList(
           this.currentWinPage,
@@ -306,8 +306,25 @@ export class Controller {
         this.unblockButtons()
       }
     })
+    document.addEventListener('pageNumberChanged', async (_event) => {
+    this.currentPage = this.view.currentPageNum
+    this.totalPages = this.getPageNumber()
+    this.view.main.pageNum.textContent = `Page #${this.currentPage}`
+    this.view.main.pageNumber.textContent = `${this.currentPage}/${ await this.totalPages}`
+    })
+
+    document.addEventListener('winPageNumberChanged', async (_event) => {
+      if  (this.currentWinPage !== 1) {
+      this.currentWinPage = this.currentWinPage - 1
+      }
+      this.totalWinPages = this.getWinPageNumber()
+      this.view.winnersPage.pageNum.textContent = `Page # ${this.currentWinPage}`
+      this.view.winnersPage.pageNumber.textContent = `${this.currentWinPage}/${await this.totalWinPages}`
+      })
+  
   }
 
+ 
   private async getWinnersList(
     num: number,
     sort: string,
@@ -371,6 +388,7 @@ export class Controller {
     this.view.main.garageContainer.innerHTML = ''
     this.view.renderCars(this.view.garageService.getCarsList(this.currentPage))
     this.totalPages = this.getPageNumber()
+    this.view.main.pageNumber.textContent = `${this.currentPage}/${ await this.totalPages}`
   }
 
   private async getWinPageNumber(): Promise<number> {
@@ -396,6 +414,8 @@ export class Controller {
     }
     try {
       const winnerName = await this.GarageService.getCar(winner.id)
+      this.totalWinPages = this.getWinPageNumber()
+      this.view.winnersPage.pageNumber.textContent = `${this.currentWinPage}/${await this.totalWinPages}`
       this.audio.src = 'click.mp3'
       this.audio.play()
       this.toast.show(
@@ -430,6 +450,9 @@ export class Controller {
       }
       try {
         await this.WinnerService.createWinner(newWinner)
+        this.totalWinPages = this.getWinPageNumber()
+      console.log(await this.totalWinPages)
+      this.view.winnersPage.pageNumber.textContent = `${this.currentWinPage}/${await this.totalWinPages}`
       } catch (error) {
         console.error('Failed to create a new winner', error)
       }

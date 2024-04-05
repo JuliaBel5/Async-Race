@@ -165,9 +165,23 @@ export class View {
               }
             }
             this.main.garageContainer.innerHTML = ''
-            await this.renderCars(
-              this.garageService.getCarsList(this.currentPageNum)
-            )
+            
+            const carList = await this.garageService.getCarsList(this.currentPageNum)
+            if (carList.length === 0 && this.currentPageNum !== 1) {
+              this.currentPageNum -= 1
+            }
+              const pageNumberChanged = new CustomEvent('pageNumberChanged')
+              document.dispatchEvent(pageNumberChanged)
+            
+            const winList = await this.winnerService.getFullWinnersList()
+            console.log(winList.length, 'winList.length', winList.length % 10, 'winList.length % 10')
+            if (winList.length % 10 === 0 && winList.length !== 0) {
+              const winPageNumberChanged = new CustomEvent('winPageNumberChanged')
+              document.dispatchEvent(winPageNumberChanged)
+            }
+            this.renderCars(this.garageService.getCarsList(this.currentPageNum))
+            
+         
           })
         }
         if (this.trackWrapper.selectButton) {
@@ -177,10 +191,15 @@ export class View {
               this.carIsSelected = true
               this.main.colorInput2.value = this.trackWrapper.carData.color
               this.main.updateInput.value = this.trackWrapper.carData.name
+              colorCar(this.main.preview2, this.trackWrapper.carData.color)
             }
           })
         }
-
+        const pageNumberChanged = new CustomEvent('pageNumberChanged')
+        document.dispatchEvent(pageNumberChanged)
+        const winPageNumberChanged = new CustomEvent('winPageNumberChanged')
+        document.dispatchEvent(winPageNumberChanged)
+        
         if (this.trackWrapper.newCar && this.trackWrapper.trackWrapper) {
           this.carsArr.push(this.trackWrapper.newCar.car)
           this.main.garageContainer.append(this.trackWrapper.trackWrapper)
@@ -196,34 +215,4 @@ export class View {
     this.createNewCars(carList.length, carList)
   }
 
-  /* public async stop(id: number) {
-    await this.engineService.getEnginePrams(id, 'stopped');
-    
-   } */
-
-  /* private async getCarId(): Promise<string> {
-    const carList = await this.garageService.carList
-    const num = carList.length - 1
-    return carList[num].id.toString()
-  }
-
-  private async getCarList(): Promise<Garage[]> {
-    const carList = await this.garageService.carList
-    return carList
-  } */
-
-  /* public async launchAll(): Promise<void> {
-    const idArr: number[] = []
-    try {
-      const carsList = await this.garageService.getCarsList(this.currentPageNum)
-      for (let i = 0; i < carsList.length; i += 1) {
-        const { id } = carsList[i]
-        idArr.push(id)
-      }
-      await Promise.all(idArr.map((el) => this.raceCar(el)))
-    } catch (error) {
-      console.error('Failed to get the cars list')
-    }
-  }
-*/
 }

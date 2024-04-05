@@ -210,7 +210,7 @@ export class Main {
     this.pageNumber = createElement({
       tag: 'div',
       classList: ['title'],
-      textContent: '1'
+      textContent: '1/1'
     })
 
     this.nextButton = createElement({
@@ -230,7 +230,6 @@ export class Main {
     )
 
     this.container.append(
-      //    this.buttonsWrapper,
       this.buttonsWrapper1,
       this.buttonsWrapper2,
       this.header,
