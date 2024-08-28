@@ -1,8 +1,8 @@
-# Async Race - Radio-Controlled Car Racing SPA
+# Async Race - Car Racing SPA
 
 ## 📜 Project Description
 
-This project is a Single Page Application (SPA) designed to manage a collection of radio-controlled cars, operate their engines, and showcase race statistics. The application allows users to engage in drag-racing competitions, managing and racing cars via a user-friendly interface.
+This project is a Single Page Application (SPA) designed to manage a collection of cars, operate their engines, and showcase race statistics. The application allows users to engage in racing competitions, managing and racing cars via a user-friendly interface.
 
 The project was inspired by a challenge to recreate a nearly-completed application after the original developer lost their work. With the demo video and a server mock as references, this application has been meticulously reconstructed with a focus on speed, efficiency, and modular architecture. The goal was to outpace competitors by delivering an innovative solution to car management and racing competitions.
 
@@ -38,7 +38,7 @@ The project was inspired by a challenge to recreate a nearly-completed applicati
 
 To experience the application, follow these steps:
 
-1. **Clone the Repository:** Retrieve the project from the GitHub repository.
+1. **Clone the Repository:** Retrieve the project from the GitHub repository. You can also use the [deploy](https://rolling-scopes-school.github.io/juliabel5-JSFE2023Q4/async-race/)
 2. **Install Dependencies:** Ensure Node.js is installed, then install the necessary packages.
 3. **Launch the Server:** The application uses a server mock to manage car data and race operations. Start the server by following the instructions provided in the [server repository](https://github.com/mikhama/async-race-api).
 4. **Start the Application:** Once the server is running, start the development server and open your browser to interact with the application.
