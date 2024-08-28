@@ -1,5 +1,4 @@
 
-Certainly! Here’s a detailed description for your repository that includes the task description, project objectives, and instructions on how to run the application with the server:
 
 Async Race - Radio-Controlled Car Racing SPA
 📜 Project Description
